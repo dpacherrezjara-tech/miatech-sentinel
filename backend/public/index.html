@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miatech Sentinel — Dashboard</title>
+  <meta name="description" content="Sistema empresarial de monitoreo en tiempo real de credenciales sensibles." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<!-- LOGIN SCREEN -->
+<div id="loginScreen" class="login-screen">
+  <div class="login-glow"></div>
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="logo-icon">🛡️</div>
+      <h1>Miatech Sentinel</h1>
+      <p>Sistema de Monitoreo Empresarial</p>
+    </div>
+    <form id="loginForm" class="login-form">
+      <div class="form-group">
+        <label for="loginEmail">Correo electrónico</label>
+        <input id="loginEmail" type="email" placeholder="admin@miatech.com" value="admin@miatech.com" required />
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Contraseña</label>
+        <input id="loginPassword" type="password" placeholder="Password" value="admin123" required />
+      </div>
+      <button id="loginBtn" type="submit" class="btn-primary btn-full"><span>Iniciar Sesion</span></button>
+      <p id="loginError" class="login-error hidden">Credenciales invalidas</p>
+    </form>
+  </div>
+</div>
+<!-- MAIN APP -->
+<div id="app" class="app hidden">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="brand">
+        <div class="brand-icon">🛡️</div>
+        <div class="brand-text">
+          <span class="brand-name">Sentinel</span>
+          <span class="brand-sub">by Miatech</span>
+        </div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-page="dashboard" id="nav-dashboard"><span class="nav-icon">📊</span><span>Dashboard</span></button>
+      <button class="nav-item" data-page="findings" id="nav-findings"><span class="nav-icon">🔍</span><span>Hallazgos</span><span class="badge" id="findingsBadge">0</span></button>
+      <button class="nav-item" data-page="agents" id="nav-agents"><span class="nav-icon">💻</span><span>Agentes</span></button>
+      <button class="nav-item" data-page="events" id="nav-events"><span class="nav-icon">📋</span><span>Eventos</span></button>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <div class="user-avatar">A</div>
+        <div class="user-detail"><span id="userDisplayName">Admin</span><span class="user-role">Administrador</span></div>
+      </div>
+      <button id="logoutBtn" class="btn-logout" title="Cerrar sesion">X</button>
+    </div>
+  </aside>
+  <main class="main-content">
+    <header class="topbar">
+      <div class="topbar-left">
+        <h2 id="pageTitle">Dashboard</h2>
+        <span class="page-subtitle" id="pageSubtitle">Vista general del sistema</span>
+      </div>
+      <div class="topbar-right">
+        <div class="status-pill" id="liveStatus"><span class="pulse-dot"></span><span>EN VIVO</span></div>
+        <button id="refreshBtn" class="btn-icon" title="Actualizar">&#8635;</button>
+      </div>
+    </header>
+    <!-- DASHBOARD PAGE -->
+    <section id="page-dashboard" class="page active">
+      <div class="stats-grid">
+        <div class="stat-card critical"><div class="stat-icon">⚠️</div><div class="stat-info"><span class="stat-value" id="stat-critical">0</span><span class="stat-label">Hallazgos Criticos</span></div></div>
+        <div class="stat-card"><div class="stat-icon">🔍</div><div class="stat-info"><span class="stat-value" id="stat-findings">0</span><span class="stat-label">Total Hallazgos</span></div></div>
+        <div class="stat-card active-card"><div class="stat-icon">💻</div><div class="stat-info"><span class="stat-value" id="stat-agents">0</span><span class="stat-label">Agentes Activos</span></div></div>
+        <div class="stat-card"><div class="stat-icon">📋</div><div class="stat-info"><span class="stat-value" id="stat-events">0</span><span class="stat-label">Eventos</span></div></div>
+      </div>
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-header"><h3>Ultimos Hallazgos</h3><button class="btn-link" data-page="findings">Ver todos</button></div>
+          <div class="table-wrapper"><table class="data-table"><thead><tr><th>Host</th><th>Archivo</th><th>Regla</th><th>Sev.</th><th>Hora</th></tr></thead><tbody id="recentFindingsBody"></tbody></table></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3>Agentes</h3><button class="btn-link" data-page="agents">Ver todos</button></div>
+          <div id="agentsStatusList" class="agents-list"></div>
+        </div>
+      </div>
+      <div class="card"><div class="card-header"><h3>Eventos Recientes</h3></div><div id="recentEventsList" class="events-feed"></div></div>
+    </section>
+    <!-- FINDINGS PAGE -->
+    <section id="page-findings" class="page hidden">
+      <div class="card">
+        <div class="card-header"><h3>Todos los Hallazgos</h3>
+          <select id="findingSeverityFilter" class="filter-select"><option value="">Todas las severidades</option><option value="High">Alta</option><option value="Medium">Media</option><option value="Low">Baja</option></select>
+        </div>
+        <div class="table-wrapper"><table class="data-table"><thead><tr><th>Host</th><th>Usuario</th><th>Archivo</th><th>Regla</th><th>Severidad</th><th>Detectado</th></tr></thead><tbody id="allFindingsBody"></tbody></table></div>
+      </div>
+    </section>
+    <!-- AGENTS PAGE -->
+    <section id="page-agents" class="page hidden">
+      <div class="card"><div class="card-header"><h3>Agentes Registrados</h3></div>
+        <div class="table-wrapper"><table class="data-table"><thead><tr><th>Estado</th><th>Hostname</th><th>Usuario</th><th>IP</th><th>Version</th><th>Ultimo Ping</th></tr></thead><tbody id="allAgentsBody"></tbody></table></div>
+      </div>
+    </section>
+    <!-- EVENTS PAGE -->
+    <section id="page-events" class="page hidden">
+      <div class="card"><div class="card-header"><h3>Registro de Eventos</h3></div><div id="allEventsList" class="events-feed"></div></div>
+    </section>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
