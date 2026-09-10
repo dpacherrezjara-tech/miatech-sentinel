@@ -1,0 +1,314 @@
+{
+  "agents": [
+    {
+      "id": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "username": "dpacherrez",
+      "ipAddress": "10.1.0.61",
+      "version": "1.0.0",
+      "status": "active",
+      "lastPing": "2026-09-10T22:08:38.790Z"
+    },
+    {
+      "id": "PC-DEV-02",
+      "hostname": "PC-DEV-02",
+      "username": "mrodriguez",
+      "ipAddress": "10.0.0.42",
+      "version": "1.0.0",
+      "status": "active",
+      "lastPing": "2026-09-10T21:34:52.574Z"
+    },
+    {
+      "id": "PC-FINANCE-07",
+      "hostname": "PC-FINANCE-07",
+      "username": "cgonzalez",
+      "ipAddress": "10.0.0.88",
+      "version": "0.9.8",
+      "status": "inactive",
+      "lastPing": "2026-09-10T16:34:52.574Z"
+    }
+  ],
+  "findings": [
+    {
+      "id": "f_1789078119118_165",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "username": "dpacherrez",
+      "filePath": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\backend\\data\\db.json",
+      "ruleId": "api-key",
+      "description": "Detecta API Key",
+      "severity": "High",
+      "secret": "sk_live_9921abc...",
+      "lineNumber": 99,
+      "fullMatch": "API_KEY=sk_live_9921abc...\"",
+      "detectedAt": "2026-09-10T22:08:39.118Z"
+    },
+    {
+      "id": "f_1789078119005_720",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "username": "dpacherrez",
+      "filePath": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\backend\\data\\db.json",
+      "ruleId": "api-key",
+      "description": "Detecta API Key",
+      "severity": "High",
+      "secret": "sk_live_9921abc...\\",
+      "lineNumber": 71,
+      "fullMatch": "API_KEY=sk_live_9921abc...\\\"",
+      "detectedAt": "2026-09-10T22:08:39.005Z"
+    },
+    {
+      "id": "f_1789078118902_823",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "username": "dpacherrez",
+      "filePath": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\backend\\data\\db.json",
+      "ruleId": "api-key",
+      "description": "Detecta API Key",
+      "severity": "High",
+      "secret": "sk_live_9921abc...\\\\\\",
+      "lineNumber": 57,
+      "fullMatch": "API_KEY=sk_live_9921abc...\\\\\\\"",
+      "detectedAt": "2026-09-10T22:08:38.902Z"
+    },
+    {
+      "id": "f_1789078118795_885",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "username": "dpacherrez",
+      "filePath": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\backend\\data\\db.json",
+      "ruleId": "api-key",
+      "description": "Detecta API Key",
+      "severity": "High",
+      "secret": "sk_live_9921abc...\\",
+      "lineNumber": 43,
+      "fullMatch": "API_KEY=sk_live_9921abc...\\\"",
+      "detectedAt": "2026-09-10T22:08:38.795Z"
+    },
+    {
+      "id": "f_1789078088911_650",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "username": "dpacherrez",
+      "filePath": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\backend\\data\\db.json",
+      "ruleId": "api-key",
+      "description": "Detecta API Key",
+      "severity": "High",
+      "secret": "sk_live_9921abc...",
+      "lineNumber": 71,
+      "fullMatch": "API_KEY=sk_live_9921abc...\"",
+      "detectedAt": "2026-09-10T22:08:08.911Z"
+    },
+    {
+      "id": "f_1789078088781_917",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "username": "dpacherrez",
+      "filePath": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\backend\\data\\db.json",
+      "ruleId": "api-key",
+      "description": "Detecta API Key",
+      "severity": "High",
+      "secret": "sk_live_9921abc...\\",
+      "lineNumber": 43,
+      "fullMatch": "API_KEY=sk_live_9921abc...\\\"",
+      "detectedAt": "2026-09-10T22:08:08.781Z"
+    },
+    {
+      "id": "f_1789078059777_262",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "username": "dpacherrez",
+      "filePath": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\backend\\data\\db.json",
+      "ruleId": "api-key",
+      "description": "Detecta API Key",
+      "severity": "High",
+      "secret": "sk_live_9921abc...",
+      "lineNumber": 57,
+      "fullMatch": "API_KEY=sk_live_9921abc...\"",
+      "detectedAt": "2026-09-10T22:07:39.779Z"
+    },
+    {
+      "id": "f1",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "username": "dpacherrez",
+      "filePath": "D:\\config.json",
+      "ruleId": "password-equals",
+      "description": "Coincidencia con password=",
+      "severity": "High",
+      "secret": "admin123",
+      "lineNumber": 15,
+      "fullMatch": "password=\"admin123\"",
+      "detectedAt": "2026-09-10T21:29:52.574Z"
+    },
+    {
+      "id": "f2",
+      "agentId": "PC-DEV-02",
+      "hostname": "PC-DEV-02",
+      "username": "mrodriguez",
+      "filePath": "C:\\Users\\mrodriguez\\.env",
+      "ruleId": "api-key",
+      "description": "Llave API detectada",
+      "severity": "High",
+      "secret": "sk_live_9921abc...",
+      "lineNumber": 4,
+      "fullMatch": "API_KEY=sk_live_9921abc...",
+      "detectedAt": "2026-09-10T20:52:52.574Z"
+    }
+  ],
+  "events": [
+    {
+      "id": "e_1789078119124",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "eventType": "credential_found",
+      "severity": "ALERT",
+      "description": "Credencial detectada en db.json (api-key)",
+      "createdAt": "2026-09-10T22:08:39.124Z"
+    },
+    {
+      "id": "e_1789078119118",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "eventType": "credential_found",
+      "severity": "ALERT",
+      "description": "Hallazgo en db.json (api-key)",
+      "createdAt": "2026-09-10T22:08:39.118Z"
+    },
+    {
+      "id": "e_1789078119008",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "eventType": "credential_found",
+      "severity": "ALERT",
+      "description": "Credencial detectada en db.json (api-key)",
+      "createdAt": "2026-09-10T22:08:39.008Z"
+    },
+    {
+      "id": "e_1789078119005",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "eventType": "credential_found",
+      "severity": "ALERT",
+      "description": "Hallazgo en db.json (api-key)",
+      "createdAt": "2026-09-10T22:08:39.005Z"
+    },
+    {
+      "id": "e_1789078118905",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "eventType": "credential_found",
+      "severity": "ALERT",
+      "description": "Credencial detectada en db.json (api-key)",
+      "createdAt": "2026-09-10T22:08:38.905Z"
+    },
+    {
+      "id": "e_1789078118902",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "eventType": "credential_found",
+      "severity": "ALERT",
+      "description": "Hallazgo en db.json (api-key)",
+      "createdAt": "2026-09-10T22:08:38.902Z"
+    },
+    {
+      "id": "e_1789078118798",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "eventType": "credential_found",
+      "severity": "ALERT",
+      "description": "Credencial detectada en db.json (api-key)",
+      "createdAt": "2026-09-10T22:08:38.798Z"
+    },
+    {
+      "id": "e_1789078118795",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "eventType": "credential_found",
+      "severity": "ALERT",
+      "description": "Hallazgo en db.json (api-key)",
+      "createdAt": "2026-09-10T22:08:38.795Z"
+    },
+    {
+      "id": "e_1789078088913",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "eventType": "credential_found",
+      "severity": "ALERT",
+      "description": "Credencial detectada en db.json (api-key)",
+      "createdAt": "2026-09-10T22:08:08.913Z"
+    },
+    {
+      "id": "e_1789078088911",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "eventType": "credential_found",
+      "severity": "ALERT",
+      "description": "Hallazgo en db.json (api-key)",
+      "createdAt": "2026-09-10T22:08:08.911Z"
+    },
+    {
+      "id": "e_1789078088786",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "eventType": "credential_found",
+      "severity": "ALERT",
+      "description": "Credencial detectada en db.json (api-key)",
+      "createdAt": "2026-09-10T22:08:08.786Z"
+    },
+    {
+      "id": "e_1789078088781",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "eventType": "credential_found",
+      "severity": "ALERT",
+      "description": "Hallazgo en db.json (api-key)",
+      "createdAt": "2026-09-10T22:08:08.781Z"
+    },
+    {
+      "id": "e_1789078059788",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "eventType": "credential_found",
+      "severity": "ALERT",
+      "description": "Credencial detectada en db.json (api-key)",
+      "createdAt": "2026-09-10T22:07:39.788Z"
+    },
+    {
+      "id": "e_1789078059779",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "eventType": "credential_found",
+      "severity": "ALERT",
+      "description": "Hallazgo en db.json (api-key)",
+      "createdAt": "2026-09-10T22:07:39.781Z"
+    },
+    {
+      "id": "e_1789078059621",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "eventType": "startup",
+      "severity": "INFO",
+      "description": "Agente iniciado correctamente",
+      "createdAt": "2026-09-10T22:07:39.646Z"
+    },
+    {
+      "id": "e1",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "eventType": "startup",
+      "severity": "INFO",
+      "description": "Aplicación iniciada correctamente",
+      "createdAt": "2026-09-10T18:34:52.574Z"
+    },
+    {
+      "id": "e2",
+      "agentId": "LAP-DPACHERREZ",
+      "hostname": "LAP-DPACHERREZ",
+      "eventType": "credential_found",
+      "severity": "ALERT",
+      "description": "Hallazgo en D:\\config.json (password-equals)",
+      "createdAt": "2026-09-10T21:29:52.574Z"
+    }
+  ]
+}
