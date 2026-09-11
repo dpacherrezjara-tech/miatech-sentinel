@@ -69,7 +69,7 @@ namespace CredentialScanner
 
             InitializeComponent();
 
-            // 🔴 CARGAR ICONO Y ASIGNARLO AL FORMULARIO
+            //
             Icon appIcon = LoadCustomIcon();
             this.Icon = appIcon;
             if (notifyIcon != null)
@@ -84,7 +84,9 @@ namespace CredentialScanner
             SetupSystemTray();
             SetupTimers();
 
-            Logger.Info($"Aplicación iniciada | ");//Equipo: {_computerName} | Usuario: {_userName}", _computerName, _userName);
+
+            //Logger.Info($"Aplicación iniciada |",// Equipo: {_computerName} | Usuario: {_userName}",
+              //  _computerName, _userName);
 
             if (_scanPaths.Count > 0)
             {
@@ -103,6 +105,7 @@ namespace CredentialScanner
             base.Dispose(disposing);
         }
 
+        
         private void LoadConfiguration()
         {
             string rootSetup = ConfigurationManager.AppSettings["rootSetup"];
@@ -127,9 +130,22 @@ namespace CredentialScanner
             }
 
             _config = new ConfigService(setupPath);
-            _scanPaths = _config.GetScanPaths();
 
             Logger.Initialize(_config.LogPath, _config.LogFileName);
+
+           // Logger.Info($"Configuración cargada desde: {setupPath}", _computerName, _userName);
+
+            _scanPaths = _config.GetScanPaths();
+
+            if (_scanPaths.Count == 0)
+            {
+                Logger.Warning("No se configuraron rutas de monitoreo. Revisa [MONITOR_SETTINGS] en setup.dat",
+                    _computerName, _userName);
+            }
+            else
+            {
+                //Logger.Info($"Rutas de monitoreo cargadas.");//: {_scanPaths.Count}", _computerName, _userName);
+            }
         }
 
         private void InicializarServicios()
@@ -167,10 +183,7 @@ namespace CredentialScanner
             panelFooter = new Panel();
             lblFooter = new Label();
 
-            // ============================================================
-            // PANEL HEADER             lblFooter.TextAlign = ContentAlignment.MiddleCenter;
-
-            // ============================================================
+            
             panelHeader.BackColor = Color.FromArgb(0, 51, 102);
             panelHeader.Dock = DockStyle.Top;
             panelHeader.Size = new Size(500, 55);
@@ -190,9 +203,6 @@ namespace CredentialScanner
             panelHeader.Controls.Add(lblTitle);
             panelHeader.Controls.Add(lblSubTitle);
 
-            // ============================================================
-            // PANEL INFO
-            // ============================================================
             panelInfo.BackColor = Color.White;
             panelInfo.Dock = DockStyle.Fill;
             panelInfo.Padding = new Padding(10, 8, 10, 8);
@@ -260,9 +270,7 @@ namespace CredentialScanner
             panelInfo.Controls.Add(lblVersionText);
             panelInfo.Controls.Add(lblVersionValue);
 
-            // ============================================================
-            // PANEL FOOTER
-            // ============================================================
+         
             panelFooter.BackColor = Color.FromArgb(240, 240, 240);
             panelFooter.Dock = DockStyle.Bottom;
             panelFooter.Size = new Size(500, 28);
@@ -276,9 +284,7 @@ namespace CredentialScanner
 
             panelFooter.Controls.Add(lblFooter);
 
-            // ============================================================
-            // MAINFORM
-            // ============================================================
+            
             this.ClientSize = new Size(300, 200);
             this.MinimumSize = new Size(300, 200);
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -346,9 +352,19 @@ namespace CredentialScanner
 
             notifyIcon.ContextMenuStrip = contextMenu;
 
-            notifyIcon.ShowBalloonTip(3000, "Miatech Sentinel",
-                "Aplicación iniciada correctamente.\nHaz clic derecho para ver opciones.",
-                ToolTipIcon.Info);
+            
+            if (_scanPaths.Count == 0)
+            {
+                notifyIcon.ShowBalloonTip(5000, "Miatech Sentinel",
+                    "No hay rutas configuradas.\nRevisa setup.dat → [MONITOR_SETTINGS]",
+                    ToolTipIcon.Warning);
+            }
+            else
+            {
+                notifyIcon.ShowBalloonTip(3000, "Miatech Sentinel",
+                    "Aplicación iniciada correctamente.\nHaz clic derecho para ver opciones.",
+                    ToolTipIcon.Info);
+            }
         }
 
         private Icon LoadCustomIcon()
@@ -428,14 +444,13 @@ namespace CredentialScanner
             StopMonitoring();
         }
 
-        
         private void MenuExit_Click(object sender, EventArgs e)
         {
             if (!PedirTokenAutorizacion("Cerrar la Aplicación"))
             {
                 Logger.Warning("Intento de salida sin autorización", _computerName, _userName);
                 notifyIcon.ShowBalloonTip(3000, "Miatech Sentinel",
-                    "No puede cerrar la aplicación sin autorización.",//\nEl monitoreo continúa activo.",
+                    "No puede cerrar la aplicación sin autorización.",
                     ToolTipIcon.Warning);
 
                 // Asegurar que el monitoreo siga activo
@@ -455,7 +470,7 @@ namespace CredentialScanner
             ShowWindow();
         }
 
-        //  "X" - SOLO MINIMIZA (sin token)
+        //
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
@@ -464,10 +479,7 @@ namespace CredentialScanner
                 this.Hide();
                 this.ShowInTaskbar = false;
                 this.WindowState = FormWindowState.Minimized;
-                /*notifyIcon.ShowBalloonTip(2000, "Miatech Sentinel",
-                    "La aplicación sigue ejecutándose en segundo plano.\nHaz clic derecho en el icono para ver opciones.",
-                    ToolTipIcon.Info);
-                */return;
+                return;
             }
 
             StopMonitoring();
@@ -480,7 +492,7 @@ namespace CredentialScanner
 
         #endregion
 
-        #region 
+        #region Token de Autorización
 
         private bool PedirTokenAutorizacion(string accion)
         {
@@ -495,7 +507,7 @@ namespace CredentialScanner
                 form.TopMost = true;
 
                 var lblMensaje = new Label();
-                lblMensaje.Text = $"Ingrese el token de administrador";// para:\n{accion}";
+                lblMensaje.Text = $"Ingrese el token de administrador";
                 lblMensaje.Location = new Point(20, 15);
                 lblMensaje.Size = new Size(370, 40);
                 lblMensaje.Font = new Font("Segoe UI", 9F);
@@ -547,7 +559,6 @@ namespace CredentialScanner
                         return true;
                     }
 
-                    // Token incorrecto
                     MessageBox.Show("Token incorrecto. Acción denegada.",
                         "Autorización Denegada",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -572,7 +583,7 @@ namespace CredentialScanner
                 isMonitoring = true;
                 totalFindingsCount = 0;
 
-                Logger.Info("Monitoreo iniciado");//, _computerName, _userName);
+                Logger.Info("Monitoreo iniciado |", _computerName, _userName);
 
                 foreach (var path in _scanPaths)
                 {
@@ -596,23 +607,29 @@ namespace CredentialScanner
 
                         watcher.EnableRaisingEvents = true;
                         _watchers.Add(watcher);
+
+                        //Logger.Info($"Watcher activo en: {path}", _computerName, _userName);
                     }
                     catch (Exception ex)
                     {
-                        Logger.Error($"Error en watcher: {ex.Message}", _computerName, _userName);
+                        Logger.Error($"Error en watcher ({path}): {ex.Message}", _computerName, _userName);
                     }
                 }
-
-                menuStart.Enabled = false;
-                menuStop.Enabled = true;
-                menuStatus.Text = "Estado: Activo";
-                menuStatus.ForeColor = Color.Green;
-                notifyIcon.Text = "Miatech Sentinel";
+      
+              
+                if (menuStart != null) menuStart.Enabled = false;
+                if (menuStop != null) menuStop.Enabled = true;
+                if (menuStatus != null)
+                {
+                    menuStatus.Text = "Estado: Activo";
+                    menuStatus.ForeColor = Color.Green;
+                }
+                if (notifyIcon != null) notifyIcon.Text = "Miatech Sentinel - Activo";
 
                 UpdateUI();
 
                 notifyIcon.ShowBalloonTip(2000, "Miatech Sentinel",
-                    $"Monitoreo iniciado.",// en {_watchers.Count} rutas.",
+                    $"Monitoreo iniciado",// en {_watchers.Count} ruta(s).",
                     ToolTipIcon.Info);
             }
             catch (Exception ex)
@@ -642,11 +659,14 @@ namespace CredentialScanner
             _watchers.Clear();
             isMonitoring = false;
 
-            menuStart.Enabled = true;
-            menuStop.Enabled = false;
-            menuStatus.Text = "Estado: Detenido";
-            menuStatus.ForeColor = Color.Gray;
-            notifyIcon.Text = "Miatech Sentinel - Detenido";
+            if (menuStart != null) menuStart.Enabled = true;
+            if (menuStop != null) menuStop.Enabled = false;
+            if (menuStatus != null)
+            {
+                menuStatus.Text = "Estado: Detenido";
+                menuStatus.ForeColor = Color.Gray;
+            }
+            if (notifyIcon != null) notifyIcon.Text = "Miatech Sentinel - Detenido";
 
             UpdateUI();
         }
@@ -696,9 +716,9 @@ namespace CredentialScanner
 
         private void StatusTimer_Tick(object sender, EventArgs e)
         {
-            if (isMonitoring)
+            if (isMonitoring && menuStatus != null)
             {
-                menuStatus.Text = $"Estado: Activo.";// ({_watchers.Count} watchers activos)";
+                menuStatus.Text = "Estado: Activo";
                 menuStatus.ForeColor = Color.Green;
             }
         }
@@ -756,7 +776,13 @@ namespace CredentialScanner
 
                     foreach (var finding in findings)
                     {
-                        Logger.Alert($"Archivo: {filePath} | [{finding.Severity}] Línea {finding.LineNumber}: {finding.Secret} | Regla: {finding.RuleId}", _computerName, _userName);
+                        
+                       // string masked = MaskSecret(finding.Secret);
+
+                        Logger.Alert(
+                            // $"Archivo: {filePath} | [{finding.Severity}] Línea {finding.LineNumber}: {masked} | Regla: {finding.RuleId} |",
+                            $"Archivo: {filePath} | Línea {finding.LineNumber}: {finding.Secret} |", //Regla: {finding.RuleId}",
+                            _computerName, _userName);
                     }
 
                     UpdateUI();
@@ -777,6 +803,17 @@ namespace CredentialScanner
                     _processingQueue.Remove(filePath);
                 }
             }
+        }
+
+        private static string MaskSecret(string secret)
+        {
+            if (string.IsNullOrEmpty(secret)) return "";
+            if (secret.Length <= 4) return new string('*', secret.Length);
+
+           
+            return secret.Substring(0, 2)
+                 + new string('*', secret.Length - 4)
+                 + secret.Substring(secret.Length - 2);
         }
 
         #endregion

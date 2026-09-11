@@ -1,13 +1,16 @@
-﻿using System;
+﻿using CredentialScanner.Models;
+using CredentialScanner.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using CredentialScanner.Models;
 
 namespace CredentialScanner.Services
 {
     public class ConfigService
     {
+        private const char FieldSeparator = '§';
+
         private readonly Dictionary<string, string> _config = new();
 
         public ConfigService(string configPath)
@@ -28,6 +31,7 @@ namespace CredentialScanner.Services
                 foreach (var line in lines)
                 {
                     var trimmed = line.Trim();
+
                     if (string.IsNullOrEmpty(trimmed) || trimmed.StartsWith(";") || trimmed.StartsWith("#"))
                         continue;
 
@@ -37,20 +41,42 @@ namespace CredentialScanner.Services
                         continue;
                     }
 
-                    if (trimmed.Contains('|'))
-                    {
-                        var parts = trimmed.Split('|', StringSplitOptions.RemoveEmptyEntries);
-                        if (parts.Length >= 2)
-                        {
-                            var key = parts[0].Trim();
-                            var value = parts[1].Trim();
-                            if (parts.Length > 2)
-                                value = string.Join("|", parts.Skip(1)).Trim();
+                    int sepIdx = -1;
+                    char sepUsed = '\0';
 
-                            var fullKey = string.IsNullOrEmpty(currentSection) ? key : $"{currentSection}:{key}";
-                            _config[fullKey] = value;
-                        }
+                    int iSection = trimmed.IndexOf(FieldSeparator);
+                    if (iSection > 0) { sepIdx = iSection; sepUsed = FieldSeparator; }
+
+                    if (sepIdx < 0)
+                    {
+                        int iEq = trimmed.IndexOf('=');
+                        if (iEq > 0) { sepIdx = iEq; sepUsed = '='; }
                     }
+
+                    if (sepIdx < 0)
+                    {
+                        int iColon = trimmed.IndexOf(':');
+                        if (iColon > 0) { sepIdx = iColon; sepUsed = ':'; }
+                    }
+
+                    if (sepIdx < 0)
+                    {
+                        int iPipe = trimmed.IndexOf('|');
+                        if (iPipe > 0) { sepIdx = iPipe; sepUsed = '|'; }
+                    }
+
+                    if (sepIdx <= 0) continue;
+
+                    var key = trimmed.Substring(0, sepIdx).Trim();
+                    var value = trimmed.Substring(sepIdx + 1).Trim();
+
+                    if (string.IsNullOrEmpty(key)) continue;
+
+                    if (sepUsed == '|' && key.StartsWith("RULES", StringComparison.OrdinalIgnoreCase))
+                        continue;
+
+                    var fullKey = string.IsNullOrEmpty(currentSection) ? key : $"{currentSection}:{key}";
+                    _config[fullKey] = value;
                 }
             }
             catch { }
@@ -66,21 +92,20 @@ namespace CredentialScanner.Services
         {
             var value = GetValue(section, key, null);
             if (string.IsNullOrEmpty(value)) return defaultValue;
+
             try
             {
                 if (typeof(T) == typeof(bool))
                 {
-                    var lowerValue = value.ToLowerInvariant().Trim();
-                    if (lowerValue == "true" || lowerValue == "1" || lowerValue == "yes")
-                        return (T)(object)true;
-                    if (lowerValue == "false" || lowerValue == "0" || lowerValue == "no")
-                        return (T)(object)false;
+                    var lower = value.ToLowerInvariant().Trim();
+                    if (lower == "true" || lower == "1" || lower == "yes" || lower == "si" || lower == "sí") return (T)(object)true;
+                    if (lower == "false" || lower == "0" || lower == "no") return (T)(object)false;
                     return defaultValue;
                 }
+
                 if (typeof(T) == typeof(int))
-                {
                     return (T)(object)int.Parse(value);
-                }
+
                 return (T)Convert.ChangeType(value, typeof(T));
             }
             catch { return defaultValue; }
@@ -97,63 +122,127 @@ namespace CredentialScanner.Services
                         .ToList();
         }
 
+        // ============================================================
+        // REGLAS
+        // ============================================================
         public List<CredentialRule> GetRules()
         {
             var rules = new List<CredentialRule>();
-            var ruleKeys = _config.Keys.Where(k => k.StartsWith("SCANNER_RULES:RULES")).ToList();
+            var ruleKeys = _config.Keys
+                .Where(k => k.StartsWith("SCANNER_RULES:RULES"))
+                .ToList();
 
             if (ruleKeys.Count == 0) return rules;
 
             foreach (var key in ruleKeys.OrderBy(k => k))
             {
                 var rulesRaw = _config[key];
-                var parts = rulesRaw.Split('|', StringSplitOptions.RemoveEmptyEntries);
+                var parts = rulesRaw.Split(FieldSeparator);
 
-                if (parts.Length >= 4)
+                if (parts.Length < 4) continue;
+
+                // 🔧 FIX: parsear correctamente los 5 campos
+                // Formato: ID § Descripción § Regex § Severidad § FilterType
+                // El regex puede contener § (raro), así que tomamos desde parts[2]
+                // hasta parts[Length-2], y severidad y filterType de los últimos.
+
+                string id;
+                string description;
+                string pattern;
+                string severity;
+                string filterType;
+
+                if (parts.Length == 4)
                 {
-                    var pattern = string.Join("|", parts.Skip(2).Take(parts.Length - 3));
-
-                    rules.Add(new CredentialRule
-                    {
-                        Id = parts[0].Trim(),
-                        Description = parts[1].Trim(),
-                        Pattern = pattern.Trim(),
-                        Severity = parts[parts.Length - 1].Trim()
-                    });
+                    // Sin FilterType
+                    id = parts[0].Trim();
+                    description = parts[1].Trim();
+                    pattern = parts[2].Trim();
+                    severity = parts[3].Trim();
+                    filterType = null;
                 }
+                else if (parts.Length == 5)
+                {
+                    // Con FilterType
+                    id = parts[0].Trim();
+                    description = parts[1].Trim();
+                    pattern = parts[2].Trim();
+                    severity = parts[3].Trim();
+                    filterType = parts[4].Trim();
+                }
+                else
+                {
+                    // Más de 5 partes: el regex contenía §. Rearmamos.
+                    id = parts[0].Trim();
+                    description = parts[1].Trim();
+                    pattern = string.Join(FieldSeparator.ToString(), parts.Skip(2).Take(parts.Length - 4)).Trim();
+                    severity = parts[parts.Length - 2].Trim();
+                    filterType = parts[parts.Length - 1].Trim();
+                }
+
+                if (string.IsNullOrEmpty(pattern)) continue;
+
+                rules.Add(new CredentialRule
+                {
+                    Id = id,
+                    Description = description,
+                    Pattern = pattern,
+                    Severity = severity,
+                    FilterType = string.IsNullOrEmpty(filterType) ? null : filterType   // 
+                });
             }
 
             return rules;
         }
 
+        // ============================================================
+        // RUTAS
+        // ============================================================
         public List<string> GetScanPaths()
         {
             var paths = new List<string>();
+
+            var enabled = GetValue<bool>("MONITOR_SETTINGS", "ENABLE_MONITORING", true);
+            if (!enabled)
+            {
+                Logger.Warning("MONITOR_SETTINGS:ENABLE_MONITORING = false → monitoreo deshabilitado");
+                return paths;
+            }
+
             var monitorAllDrives = GetValue<bool>("MONITOR_SETTINGS", "MONITOR_ALL_DRIVES", false);
             var monitorSpecificPaths = GetValue("MONITOR_SETTINGS", "MONITOR_SPECIFIC_PATHS", "");
 
             if (monitorAllDrives)
             {
-                var drives = DriveInfo.GetDrives();
-                foreach (var drive in drives)
+                try
                 {
-                    if (drive.DriveType == DriveType.Fixed && drive.IsReady)
+                    foreach (var drive in DriveInfo.GetDrives())
                     {
-                        paths.Add(drive.Name);
+                        if (drive.DriveType == DriveType.Fixed && drive.IsReady)
+                            paths.Add(drive.Name);
                     }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error($"Error enumerando discos: {ex.Message}");
                 }
             }
             else if (!string.IsNullOrEmpty(monitorSpecificPaths))
             {
-                var pathList = monitorSpecificPaths.Split(';', StringSplitOptions.RemoveEmptyEntries);
-                foreach (var path in pathList)
+                foreach (var path in monitorSpecificPaths.Split(';', StringSplitOptions.RemoveEmptyEntries))
                 {
                     var trimmedPath = path.Trim();
+                    if (string.IsNullOrEmpty(trimmedPath)) continue;
+
                     if (Directory.Exists(trimmedPath))
-                    {
                         paths.Add(trimmedPath);
-                    }
+                    else
+                        Logger.Warning($"Ruta configurada NO existe: {trimmedPath}");
                 }
+            }
+            else
+            {
+                Logger.Warning("MONITOR_SETTINGS: ni MONITOR_ALL_DRIVES ni MONITOR_SPECIFIC_PATHS están configurados");
             }
 
             return paths;
@@ -163,9 +252,13 @@ namespace CredentialScanner.Services
         public int MaxFileSizeMB => GetValue<int>("SCANNER_SETTINGS", "MAX_FILE_SIZE_MB", 10);
         public List<string> ExcludedPaths => GetList("SCANNER_SETTINGS", "EXCLUDED_PATHS", ';');
         public List<string> ExcludedExtensions => GetList("SCANNER_SETTINGS", "EXCLUDED_EXTENSIONS", ';');
+
         public string LogPath => GetValue("LOG_SETTINGS", "LOG_PATH",
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
             "Miatech Sentinel", "Logs"));
+
         public string LogFileName => GetValue("LOG_SETTINGS", "LOG_FILE_NAME", "MiatechSentinel.log");
+        public string LogLevel => GetValue("LOG_SETTINGS", "LOG_LEVEL", "Info");
+        public bool LogMaskSecrets => GetValue<bool>("LOG_SETTINGS", "LOG_MASK_SECRETS", true);
     }
 }

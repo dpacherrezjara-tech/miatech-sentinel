@@ -20,3 +20,26 @@ D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\obj\Debug\net10.0-windows\
 D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\obj\Debug\net10.0-windows\Miatech Sentinel.pdb
 D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\obj\Debug\net10.0-windows\Miatech Sentinel.genruntimeconfig.cache
 D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\obj\Debug\net10.0-windows\ref\Miatech Sentinel.dll
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\bin\Debug\net10.0-windows\Miatech Sentinel.exe
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\bin\Debug\net10.0-windows\Miatech Sentinel.dll.config
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\bin\Debug\net10.0-windows\Miatech Sentinel.deps.json
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\bin\Debug\net10.0-windows\Miatech Sentinel.runtimeconfig.json
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\bin\Debug\net10.0-windows\Miatech Sentinel.dll
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\bin\Debug\net10.0-windows\Miatech Sentinel.pdb
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\bin\Debug\net10.0-windows\System.ServiceProcess.ServiceController.dll
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\bin\Debug\net10.0-windows\runtimes\win\lib\net10.0\System.ServiceProcess.ServiceController.dll
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\obj\Debug\net10.0-windows\Miatech Sentinel.csproj.AssemblyReference.cache
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\obj\Debug\net10.0-windows\CredentialScanner.MainForm.resources
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\obj\Debug\net10.0-windows\Robot_EventWin.Forms.MainForm1.resources
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\obj\Debug\net10.0-windows\Miatech Sentinel.csproj.GenerateResource.cache
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\obj\Debug\net10.0-windows\Miatech Sentinel.GeneratedMSBuildEditorConfig.editorconfig
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\obj\Debug\net10.0-windows\Miatech Sentinel.AssemblyInfoInputs.cache
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\obj\Debug\net10.0-windows\Miatech Sentinel.AssemblyInfo.cs
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\obj\Debug\net10.0-windows\Miatech Sentinel.csproj.CoreCompileInputs.cache
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\obj\Debug\net10.0-windows\Miatech Sentinel.sourcelink.json
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\obj\Debug\net10.0-windows\Miatech .6F84B7E4.Up2Date
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\obj\Debug\net10.0-windows\Miatech Sentinel.dll
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\obj\Debug\net10.0-windows\refint\Miatech Sentinel.dll
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\obj\Debug\net10.0-windows\Miatech Sentinel.pdb
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\obj\Debug\net10.0-windows\Miatech Sentinel.genruntimeconfig.cache
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\obj\Debug\net10.0-windows\ref\Miatech Sentinel.dll

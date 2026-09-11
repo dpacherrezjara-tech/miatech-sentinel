@@ -16,14 +16,24 @@ namespace CredentialScanner.Services
         private readonly List<string> _excludedExtensions;
         private readonly int _maxFileSizeMB;
 
+        private readonly HashSet<string> _whitelist;
+
+        private const string SymbolChars = "@$#%!*?&_.-";
+
         public CredentialScannerService(ConfigService config, string computerName, string userName)
         {
             _rules = config.GetRules();
             _excludedPaths = config.ExcludedPaths;
             _excludedExtensions = config.ExcludedExtensions;
             _maxFileSizeMB = config.MaxFileSizeMB;
+
+            var whitelistValues = config.GetList("SCANNER_SETTINGS", "WHITELIST_VALUES", ';');
+            _whitelist = new HashSet<string>(whitelistValues, StringComparer.OrdinalIgnoreCase);
         }
 
+        // ============================================================
+        // ANÁLISIS PRINCIPAL
+        // ============================================================
         public async Task<List<CredentialFinding>> AnalyzeFileAsync(string filePath)
         {
             var findings = new List<CredentialFinding>();
@@ -46,17 +56,16 @@ namespace CredentialScanner.Services
 
                         foreach (Match match in matches)
                         {
-                            string secret = match.Value;
-                            for (int i = match.Groups.Count - 1; i >= 1; i--)
-                            {
-                                if (!string.IsNullOrEmpty(match.Groups[i].Value))
-                                {
-                                    secret = match.Groups[i].Value;
-                                    break;
-                                }
-                            }
-
+                            string secret = ExtractSecret(match);
                             if (string.IsNullOrEmpty(secret) || secret.Length < 4) continue;
+
+                            // Filtro por whitelist
+                            if (IsWhitelisted(secret)) continue;
+
+                            // 🔧 FILTRO POR FilterType (no por Id)
+                            if (!PassesFilter(rule.FilterType, secret)) continue;
+
+                            int secretIndex = GetSecretIndex(match);
 
                             findings.Add(new CredentialFinding
                             {
@@ -65,7 +74,7 @@ namespace CredentialScanner.Services
                                 Description = rule.Description,
                                 Severity = rule.Severity,
                                 Secret = secret,
-                                LineNumber = GetLineNumber(content, match.Index),
+                                LineNumber = GetLineNumber(content, secretIndex),
                                 FullMatch = match.Value
                             });
                         }
@@ -78,6 +87,102 @@ namespace CredentialScanner.Services
             return findings;
         }
 
+    
+        private static bool PassesFilter(string filterType, string value)
+        {
+            if (string.IsNullOrEmpty(filterType)) return true;
+
+            switch (filterType.Trim().ToLowerInvariant())
+            {
+               // case "high_entropy":
+                 //   return IsHighEntropyWithSymbol(value);
+                //case "high_entropy_simple":
+                  //  return IsHighEntropySimple(value);
+                default:
+                    return true;
+            }
+        }
+
+        // high_entropy: 8+, mayús + minús + dígito + símbolo
+        private static bool IsHighEntropyWithSymbol(string value)
+        {
+            if (string.IsNullOrEmpty(value) || value.Length < 8) return false;
+
+            bool hasUpper = false, hasLower = false, hasDigit = false, hasSymbol = false;
+
+            foreach (var c in value)
+            {
+                if (char.IsUpper(c)) hasUpper = true;
+                else if (char.IsLower(c)) hasLower = true;
+                else if (char.IsDigit(c)) hasDigit = true;
+                else if (SymbolChars.IndexOf(c) >= 0) hasSymbol = true;
+            }
+
+            return hasUpper && hasLower && hasDigit && hasSymbol;
+        }
+
+        // high_entropy_simple: 8-32, mayús + minús + dígito
+        private static bool IsHighEntropySimple(string value)
+        {
+            if (string.IsNullOrEmpty(value)) return false;
+            if (value.Length < 8 || value.Length > 32) return false;   // 🔧 12 → 8
+
+            bool hasUpper = false, hasLower = false, hasDigit = false;
+
+            foreach (var c in value)
+            {
+                if (char.IsUpper(c)) hasUpper = true;
+                else if (char.IsLower(c)) hasLower = true;
+                else if (char.IsDigit(c)) hasDigit = true;
+            }
+
+            return hasUpper && hasLower && hasDigit;
+        }
+
+        private static string ExtractSecret(Match match)
+        {
+            string secret = match.Value;
+
+            for (int i = match.Groups.Count - 1; i >= 1; i--)
+            {
+                if (!string.IsNullOrEmpty(match.Groups[i].Value))
+                {
+                    secret = match.Groups[i].Value;
+                    break;
+                }
+            }
+
+            return secret.Trim().Trim('"', '\'', ' ', '\t', '\r', '\n');
+        }
+
+        private static int GetSecretIndex(Match match)
+        {
+            for (int i = match.Groups.Count - 1; i >= 1; i--)
+            {
+                if (!string.IsNullOrEmpty(match.Groups[i].Value))
+                    return match.Groups[i].Index;
+            }
+            return match.Index;
+        }
+
+        private bool IsWhitelisted(string value)
+        {
+            if (string.IsNullOrEmpty(value)) return true;
+            return _whitelist.Contains(value.Trim());
+        }
+
+        // ============================================================
+        // LÍNEA
+        // ============================================================
+        private int GetLineNumber(string content, int index)
+        {
+            if (index <= 0) return 1;
+            return content.AsSpan(0, index).ToString().Split('\n').Length;
+        }
+
+        // ============================================================
+        // EXCLUSIONES
+        // ============================================================
         public bool ShouldExcludeFile(string filePath)
         {
             if (string.IsNullOrEmpty(filePath)) return true;
@@ -137,19 +242,15 @@ namespace CredentialScanner.Services
                 ".sql", ".yaml", ".yml", ".toml", ".ini", ".cfg", ".conf",
                 ".csv", ".md", ".markdown", ".log", ".env", ".properties",
                 ".sh", ".bash", ".ps1", ".bat", ".cmd", ".jsx", ".tsx", ".vue",
-                ".config", ".settings", ".xml", ".json", ".yml", ".yaml",
-                ".toml", ".ini", ".cfg", ".conf", ".rst", ".pod",
+                ".config", ".settings", ".rst", ".pod",
                 ".pl", ".pm", ".rb", ".go", ".rs", ".swift", ".kt", ".scala"
             };
             return textExtensions.Contains(ext);
         }
 
-        private int GetLineNumber(string content, int index)
-        {
-            if (index <= 0) return 1;
-            return content.AsSpan(0, index).ToString().Split('\n').Length;
-        }
-
+        // ============================================================
+        // ESPERA DE ARCHIVO
+        // ============================================================
         public async Task WaitForFileReady(string filePath, int maxRetries = 5)
         {
             for (int i = 0; i < maxRetries; i++)

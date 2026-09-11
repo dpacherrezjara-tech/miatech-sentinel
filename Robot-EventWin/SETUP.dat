@@ -1,0 +1,45 @@
+[SCANNER_SETTINGS]
+MAX_FILE_SIZE_MB§100
+EXCLUDED_PATHS§C:\Windows;C:\Program Files;C:\Program Files (x86);C:\ProgramData;D:\REPROSITORIO-GIT\NET\miatech-sentinel; C:\Users\dpacherrez\AppData\;C:\Users\dpacherrez\.docker\
+
+EXCLUDED_EXTENSIONS§.exe;.dll;.msi;.tmp;.cache;.mp3;.mp4;.jpg;.jpeg;.png;.gif;.pdf;.doc;.docx;.zip;.rar;.7z;.iso;.bin;.dat;.pem;.key;.crt;.cer;.log;.cache;.bak;.jar
+
+WHITELIST_VALUES§true;false;null;none;yes;no;on;off;admin;usuario;root;test;demo;example;experimental;localhost;userpass;127.0.0.1;0.0.0.0;utf-8;utf8;json;xml;yaml;html;csv;get;post;put;delete;http;https;ftp;ssh;temp;tmp;logs;log;bin;obj;configuracion;madrid;lunes;martes;miercoles;jueves;viernes;sabado;domingo;enero;febrero;marzo;abril;mayo;junio;julio;agosto;septiembre;octubre;noviembre;diciembre;activo;inactivo;habilitado;deshabilitado;verdadero;falso;nombre;apellido;direccion;telefono;correo;email;version;version1;version2;config;setting;servidor;servicio;aplicacion;seguridad;sistema;equipo;documento;archivo;carpeta;select;from;where;join;union;update;insert;delete;create;table;database
+
+[SCANNER_RULES]
+
+RULES1§credencial_generica§Detecta strings de 7+ caracteres§\b[A-Za-z][A-Za-z0-9@$#%!*?&_.\-]{6,63}\b§Low§generic_credential
+
+R#ULES1§credencial_con_arroba§credencial con mayus+minus+digito+arroba§\b(?=[A-Za-z0-9@$#%!*?&_.\-]{7,64}\b)(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*@)[A-Za-z0-9@$#%!*?&_.\-]{7,64}\b§Medium§
+
+#RULES2§credencial_mixta§credencial con mayus+minus+digito§\b(?=[A-Za-z0-9]{7,32}\b)(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z0-9]{7,32}\b§Medium§
+
+#RULES3§usuario_minusculas§usuario en minusculas§\b[a-z][a-z0-9_\-]{6,15}\b§Low§
+
+#RULES4§usuario_usr§usuario con prefijo USR§\bUSR[A-Z0-9_]{2,15}\b§Medium§
+
+#RULES5§palabra_mayusculas§palabra en mayusculas§\b[A-Z]{7,20}\b§Low§
+
+[MONITOR_SETTINGS]
+
+ENABLE_MONITORING§true
+
+MONITOR_ALL_DRIVES§true
+
+MONITOR_SPECIFIC_PATHS§
+
+AUTO_START§true
+
+[LOG_SETTINGS]
+
+LOG_PATH§D:\REPROSITORIO-GIT\CredentialScanner\Logs
+
+LOG_FILE_NAME§MiatechSentinel.log
+
+LOG_LEVEL§Info
+
+LOG_MASK_SECRETS§true
+
+[SECURITY_SETTINGS]
+
+EXIT_TOKEN§Pr0c3s02029@
