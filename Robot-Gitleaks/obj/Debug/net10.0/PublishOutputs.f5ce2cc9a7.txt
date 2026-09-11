@@ -1,0 +1,13 @@
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-Gitleaks\bin\Release\net10.0\publish\Robot-Gitleaks.exe
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-Gitleaks\bin\Release\net10.0\publish\Robot-Gitleaks.dll
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-Gitleaks\bin\Release\net10.0\publish\Robot-Gitleaks.deps.json
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-Gitleaks\bin\Release\net10.0\publish\Robot-Gitleaks.runtimeconfig.json
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-Gitleaks\bin\Release\net10.0\publish\Robot-Gitleaks.dll.config
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-Gitleaks\bin\Release\net10.0\publish\Robot-Gitleaks.pdb
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-Gitleaks\bin\Release\net10.0\publish\System.Configuration.ConfigurationManager.dll
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-Gitleaks\bin\Release\net10.0\publish\System.Diagnostics.EventLog.dll
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-Gitleaks\bin\Release\net10.0\publish\System.Security.Cryptography.ProtectedData.dll
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-Gitleaks\bin\Release\net10.0\publish\System.ServiceProcess.ServiceController.dll
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-Gitleaks\bin\Release\net10.0\publish\runtimes\win\lib\net10.0\System.Diagnostics.EventLog.Messages.dll
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-Gitleaks\bin\Release\net10.0\publish\runtimes\win\lib\net10.0\System.Diagnostics.EventLog.dll
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-Gitleaks\bin\Release\net10.0\publish\runtimes\win\lib\net10.0\System.ServiceProcess.ServiceController.dll

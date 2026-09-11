@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net10.0-windows</TargetFramework>
+		<RootNamespace>Robot_EventWin</RootNamespace>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ApplicationIcon>Icon1.ico</ApplicationIcon>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Include="..\..\..\..\UserFilesMiatech\dpacherrez\Mis imágenes\Icono\Icon2.ico" Link="Icon2.ico" />
+	  <Content Include="Icon1.ico" Link="Icon1.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.10" />
+		<PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.10" />
+	</ItemGroup>
+
+</Project>

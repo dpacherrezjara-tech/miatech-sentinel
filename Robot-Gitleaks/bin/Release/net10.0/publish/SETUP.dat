@@ -1,0 +1,45 @@
+# CONFIGURACIÓN DEL SCANNER
+[SCANNER_SETTINGS]
+MAX_FILE_SIZE_MB | 100
+EXCLUDED_PATHS | C:\Windows;C:\Program Files;C:\Program Files (x86);C:\Users;C:\Dumps;C:\System Volume Information;C:\$Recycle.Bin;C:\Users\All Users;C:\Users\Default;node_modules;.git;dist;build;__pycache__
+EXCLUDED_EXTENSIONS | .exe;.dll;.msi;.tmp;.cache;.mp3;.mp4;.jpg;.jpeg;.png;.gif;.pdf;.doc;.docx;.zip;.rar;.7z;.iso;.bin;.dat;.pem;.key;.crt;.cer;.log;.cache;.bak;.jar; .xml; .html
+
+# REGLAS DE DETECCIÓN DE CREDENCIALES - PERSONALIZADAS PARA TU ARCHIVO
+[SCANNER_RULES]
+RULES1 | usuario-laptop|Detecta Usuario laptop|Usuario\s*laptop\s*[:;=]\s*["']?([A-Za-z0-9_\-.@]{3,})["']?|High
+RULES2 | password-generic|Detecta Contraseña genérica|Contraseña\s*[:;=]\s*["']?([^"\s]{4,})["']?|High
+RULES3 | voul-userpass|Detecta voul userpass|voul\s*userpass/users/([A-Za-z0-9_\-.@]+)|High
+RULES4 | password-equal|Detecta password=|password\s*=\s*["']?([^"\s]{4,})["']?|High
+RULES5 | usuario-colon|Detecta usuario:|usuario\s*[:;=]\s*["']?([A-Za-z0-9_\-.@]{3,})["']?|High
+RULES6 | contrasena-colon|Detecta contraseña:|contraseña\s*[:;=]\s*["']?([^"\s]{4,})["']?|High
+RULES7 | usuario-password-combo|Detecta usuario y password|usuario\s*[:;=]\s*["']?([A-Za-z0-9_\-.@]{3,})["']?.*?password\s*[:;=]\s*["']?([^"\s]{4,})["']?|High
+RULES8 | usuario-contrasena-combo|Detecta usuario y contraseña|usuario\s*[:;=]\s*["']?([A-Za-z0-9_\-.@]{3,})["']?.*?contraseña\s*[:;=]\s*["']?([^"\s]{4,})["']?|High
+#RULES9 | usuarios-list|Detecta lista de usuarios|usuarios\s*[:;=]\s*["']?([A-Za-z0-9_\-.@,; ]+)["']?|High
+RULES10 | user-pass-colon|Detecta user: y pass:|user\s*[:;=]\s*["']?([A-Za-z0-9_\-.@]{3,})["']?.*?pass\s*[:;=]\s*["']?([^"\s]{4,})["']?|High
+RULES11 | clave-usuario-git|Detecta CLAVE Y USUARIO GIT|(?:CLAVE|CLVE)\s+Y\s+USUARIO\s+GIT\s*[:;=]\s*["']?([A-Za-z0-9_\-.@-]{4,})["']?|High
+RULES12 | git-token|Detecta Token GIT (base64 largo)|[A-Za-z0-9+/=]{40,}|Critical
+RULES13 | usuario-contra-combo|Detecta usuario: y contra:|usuario\s*[:;=]\s*["']?([A-Za-z0-9_\-.@]{3,})["']?.*?contra\s*[:;=]\s*["']?([^"\s]{4,})["']?|High
+RULES14 | username-pass-combo|Detecta USERNAME: y PASS:|USERNAME\s*[:;=]\s*["']?([A-Za-z0-9_\-.@]{3,})["']?.*?PASS\s*[:;=]\s*["']?([^"\s]{4,})["']?|High
+RULES15 | usuario-password-colon|Detecta USUARIO: y contraseña:|USUARIO\s*[:;=]\s*["']?([A-Za-z0-9_\-.@]{3,})["']?.*?contraseña\s*[:;=]\s*["']?([^"\s]{4,})["']?|High
+RULES16 | github-pat|Detecta GitHub Token|ghp_[A-Za-z0-9]{36}|Critical
+RULES17 | api-key|Detecta API Key|api[_-]?key\s*[:=]\s*["']?([A-Za-z0-9\-_]{20,})["']?|High
+RULES18 | aws-key|Detecta AWS Key|AKIA[0-9A-Z]{16}|Critical
+RULES19 | jwt-token|Detecta JWT Token|eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+|Critical
+RULES20 | slack-token|Detecta Slack Token|xox[abp]-[0-9A-Za-z-]+|Critical
+RULES21 | private-key|Detecta Private Key|-----BEGIN (RSA|DSA|EC|OPENSSH|PGP) PRIVATE KEY-----|Critical
+RULES22 | conn-string|Detecta Connection String|(?:^|\s|["'])connection[_-]?string\s*[:=]\s*["']?([^"\s]{10,})["']?|High
+RULES23 | mongodb-uri|Detecta MongoDB URI|mongodb(?:\+srv)?://[A-Za-z0-9:_-]+@[A-Za-z0-9.-]+(?::[0-9]+)?/[A-Za-z0-9_-]+|High
+
+# CONFIGURACIÓN DE MONITOREO
+[MONITOR_SETTINGS]
+ENABLE_MONITORING | true
+MONITOR_ALL_DRIVES | true
+MONITOR_SPECIFIC_PATHS | 
+
+#D:\UserFilesMiatech\dpacherrez\Mis documentos\Contra;D:\UserFilesMiatech\dpacherrez\Downloads
+
+# CONFIGURACIÓN DE LOGS
+[LOG_SETTINGS]
+LOG_PATH | D:\REPROSITORIO-GIT\CredentialScanner\Logs
+LOG_FILE_NAME | CredentialScanner.log
+LOG_LEVEL | Info

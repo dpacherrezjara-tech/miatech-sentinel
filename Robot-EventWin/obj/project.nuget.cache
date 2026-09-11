@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "dgSpecHash": "1t8YQeF+rag=",
+  "success": true,
+  "projectFilePath": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Miatech Sentinel.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dpacherrez\\.nuget\\packages\\system.configuration.configurationmanager\\10.0.10\\system.configuration.configurationmanager.10.0.10.nupkg.sha512",
+    "C:\\Users\\dpacherrez\\.nuget\\packages\\system.serviceprocess.servicecontroller\\10.0.10\\system.serviceprocess.servicecontroller.10.0.10.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1510",
+      "level": "Warning",
+      "message": "PackageReference System.Configuration.ConfigurationManager no se eliminará. Este paquete está disponible automáticamente y no es necesario hacer referencia a él explícitamente. Quite el elemento PackageReference.",
+      "projectPath": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Miatech Sentinel.csproj",
+      "warningLevel": 1,
+      "filePath": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Miatech Sentinel.csproj",
+      "libraryId": "System.Configuration.ConfigurationManager",
+      "targetGraphs": [
+        "net10.0-windows7.0"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+[SCANNER_SETTINGS]
+MAX_FILE_SIZE_MB | 10
+REPORT_PATH | D:\UserFilesMiatech\dpacherrez\Mis documentos\CredentialScanner\Reports
+EXCLUDED_PATHS | C:\Windows;C:\Program Files;C:\Program Files (x86);node_modules;.git;dist;build;__pycache__
+EXCLUDED_EXTENSIONS | .exe;.dll;.msi;.tmp;.log;.cache;.mp3;.mp4;.jpg;.jpeg;.png;.gif;.pdf;.doc;.docx
+
+[MONITOR_SETTINGS]
+ENABLE_MONITORING | true
+MONITOR_ALL_DRIVES | true
+MONITOR_SPECIFIC_PATHS | 
+
+[SCANNER_RULES]
+RULES | usuario-laptop|Detecta Usuario laptop|Usuario\s*laptop\s*:\s*([A-Za-z0-9_\-.]+)|High,password-pattern|Detecta passwords|(password|contraseña|clave|passwd|pwd)\s*[:=]\s*([^"\s]{4,})|High,github-pat|Detecta GitHub Token|ghp_[A-Za-z0-9]{36}|Critical

@@ -1,0 +1,49 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Robot-EventWin/1.0.0": {
+        "dependencies": {
+          "System.ServiceProcess.ServiceController": "10.0.10"
+        },
+        "runtime": {
+          "Robot-EventWin.dll": {}
+        }
+      },
+      "System.ServiceProcess.ServiceController/10.0.10": {
+        "runtime": {
+          "lib/net10.0/System.ServiceProcess.ServiceController.dll": {
+            "assemblyVersion": "10.0.0.10",
+            "fileVersion": "10.0.1026.32716"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net10.0/System.ServiceProcess.ServiceController.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "10.0.0.10",
+            "fileVersion": "10.0.1026.32716"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Robot-EventWin/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.ServiceProcess.ServiceController/10.0.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9tI/EtlMimwJn9EEtbqFrVqGCD98VfVdnW6UekC7/YHO5Ky/LMUfXibBv9+AV8g9u7uim20oHgiOqzaeEWAhqg==",
+      "path": "system.serviceprocess.servicecontroller/10.0.10",
+      "hashPath": "system.serviceprocess.servicecontroller.10.0.10.nupkg.sha512"
+    }
+  }
+}

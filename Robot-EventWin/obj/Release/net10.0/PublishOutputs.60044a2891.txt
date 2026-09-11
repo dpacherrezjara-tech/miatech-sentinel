@@ -1,0 +1,13 @@
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\Robot-EventWin.exe
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\Robot-EventWin.dll
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\Robot-EventWin.deps.json
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\Robot-EventWin.runtimeconfig.json
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\Robot-EventWin.dll.config
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\Robot-EventWin.pdb
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\System.Configuration.ConfigurationManager.dll
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\System.Diagnostics.EventLog.dll
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\System.Security.Cryptography.ProtectedData.dll
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\System.ServiceProcess.ServiceController.dll
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\runtimes\win\lib\net10.0\System.Diagnostics.EventLog.Messages.dll
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\runtimes\win\lib\net10.0\System.Diagnostics.EventLog.dll
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\runtimes\win\lib\net10.0\System.ServiceProcess.ServiceController.dll

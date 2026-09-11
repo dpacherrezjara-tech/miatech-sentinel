@@ -1,0 +1,39 @@
+# CONFIGURACIÓN DEL SCANNER Robot-Event-Windows
+[SCANNER_SETTINGS]
+MAX_FILE_SIZE_MB | 100
+EXCLUDED_PATHS | C:\Windows;C:\Program Files;C:\Program Files (x86);C:\Program Files;C:\Users\dpacherrez\AppData;C:\ProgramData
+EXCLUDED_EXTENSIONS | .exe;.dll;.msi;.tmp;.cache;.mp3;.mp4;.jpg;.jpeg;.png;.gif;.pdf;.doc;.docx;.zip;.rar;.7z;.iso;.bin;.dat;.pem;.key;.crt;.cer;.log;.cache;.bak;.jar;.xml;.html
+
+# REGLAS
+[SCANNER_RULES]
+
+RULES3 | password_pass | Detecta Pass o Password | [Pp][Aa][Ss][Ss][Ww][Oo][Rr][Dd]?\s*[:;=]\s*["']?([A-Za-z0-9_.\-@$#%!*?&]{4,64})["']? | High
+RULES3 | password_clave | Detecta Clave o Contrasena | ([Cc][Ll][Aa][Vv][Ee]|[Cc][Oo][Nn][Tt][Rr][Aa][Ss][Ee][Ññ][Aa])\s*[:;=]\s*["']?([A-Za-z0-9_.\-@$#%!*?&]{4,64})["']? | High
+
+# MONITOREO - SOLO EVENTOS
+
+[MONITOR_SETTINGS]
+ENABLE_MONITORING | true
+MONITOR_ALL_DRIVES | true
+MONITOR_SPECIFIC_PATHS | 
+
+
+# CONFIGURACIÓN DE CORREO - PUENTE MI-SERVICES
+#[EMAIL_SETTINGS]
+#ENABLE_EMAIL | true
+#API_URL | http://10.0.0.31:3010/api/v1/email
+#API_TOKEN | 
+
+# LOGS
+[LOG_SETTINGS]
+LOG_PATH | D:\REPROSITORIO-GIT\CredentialScanner\Logs
+LOG_FILE_NAME | MiatechSentinel.log
+LOG_LEVEL | Info
+
+[SECURITY_SETTINGS]
+# Token para autorizar Detener Monitoreo y Salir
+EXIT_TOKEN | Pr0c3s02029@
+
+# CONFIGURACION API SENTINEL PRUEBA
+#[API_SETTINGS]
+#API_URL | http://localhost:3000/api/v1

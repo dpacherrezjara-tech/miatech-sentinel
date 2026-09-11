@@ -1,0 +1,8 @@
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\Miatech Sentinel.exe
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\Miatech Sentinel.dll
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\Miatech Sentinel.deps.json
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\Miatech Sentinel.runtimeconfig.json
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\Miatech Sentinel.dll.config
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\Miatech Sentinel.pdb
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\System.ServiceProcess.ServiceController.dll
+D:\REPROSITORIO-GIT\NET\Robot-Gitleaks\Robot-EventWin\bin\Release\net10.0\publish\runtimes\win\lib\net10.0\System.ServiceProcess.ServiceController.dll
