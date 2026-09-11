@@ -1,11 +1,12 @@
-﻿using System;
+﻿using CredentialScanner.Models;
+using CredentialScanner.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using CredentialScanner.Models;
 
 namespace CredentialScanner.Services
 {
@@ -15,10 +16,8 @@ namespace CredentialScanner.Services
         private readonly List<string> _excludedPaths;
         private readonly List<string> _excludedExtensions;
         private readonly int _maxFileSizeMB;
-
-        private readonly HashSet<string> _whitelist;
-
-        private const string SymbolChars = "@$#%!*?&_.-";
+        private readonly RiskScoringService _riskScoring;
+        private readonly int _umbralLog;
 
         public CredentialScannerService(ConfigService config, string computerName, string userName)
         {
@@ -26,27 +25,49 @@ namespace CredentialScanner.Services
             _excludedPaths = config.ExcludedPaths;
             _excludedExtensions = config.ExcludedExtensions;
             _maxFileSizeMB = config.MaxFileSizeMB;
-
-            var whitelistValues = config.GetList("SCANNER_SETTINGS", "WHITELIST_VALUES", ';');
-            _whitelist = new HashSet<string>(whitelistValues, StringComparer.OrdinalIgnoreCase);
+            _riskScoring = new RiskScoringService(config);
+            _umbralLog = config.GetValue<int>("RISK_SCORING", "UMBRAL_LOG", 80);
         }
 
-        // ============================================================
-        // ANÁLISIS PRINCIPAL
-        // ============================================================
         public async Task<List<CredentialFinding>> AnalyzeFileAsync(string filePath)
         {
             var findings = new List<CredentialFinding>();
 
             try
             {
-                string content = null;
-
-                try { content = await File.ReadAllTextAsync(filePath, Encoding.UTF8); }
-                catch { try { content = await File.ReadAllTextAsync(filePath, Encoding.Default); } catch { try { content = await File.ReadAllTextAsync(filePath, Encoding.ASCII); } catch { return findings; } } }
-
+                string content = await ReadFileAsync(filePath);
                 if (string.IsNullOrEmpty(content)) return findings;
 
+                var lines = content.Split(new[] { '\r', '\n' }, StringSplitOptions.None);
+                var lineasAgregadas = new HashSet<int>();
+
+                // 🔴 DIAGNÓSTICO: Cuántas líneas se van a analizar
+                //Logger.Info($"DIAGNÓSTICO: Archivo {Path.GetFileName(filePath)} tiene {lines.Length} líneas", "", "");
+
+                // 🔴 1. PUNTUACIÓN DE RIESGO
+                var riskScores = _riskScoring.AnalyzeContent(content, filePath);
+
+              //  Logger.Info($"DIAGNÓSTICO: AnalyzeContent encontró {riskScores.Count} hallazgos", "", "");
+
+                foreach (var risk in riskScores)
+                {
+                    //Logger.Info($"DIAGNÓSTICO: Riesgo Línea {risk.LineNumber} ({risk.Score} pts): {risk.Line}", "", "");
+
+                    findings.Add(new CredentialFinding
+                    {
+                        FilePath = filePath,
+                        RuleId = risk.RuleId,
+                        Description = $"{risk.Description} ({risk.Score} pts)",
+                        Severity = risk.Severity,
+                        Secret = risk.Line,
+                        LineNumber = risk.LineNumber,
+                        FullMatch = risk.Line
+                    });
+
+                    lineasAgregadas.Add(risk.LineNumber);
+                }
+
+                // 🔴 2. REGLAS ESPECÍFICAS
                 foreach (var rule in _rules)
                 {
                     try
@@ -56,133 +77,66 @@ namespace CredentialScanner.Services
 
                         foreach (Match match in matches)
                         {
-                            string secret = ExtractSecret(match);
+                            string secret = match.Value;
+                            for (int i = match.Groups.Count - 1; i >= 1; i--)
+                            {
+                                if (!string.IsNullOrEmpty(match.Groups[i].Value))
+                                {
+                                    secret = match.Groups[i].Value;
+                                    break;
+                                }
+                            }
+
                             if (string.IsNullOrEmpty(secret) || secret.Length < 4) continue;
 
-                            // Filtro por whitelist
-                            if (IsWhitelisted(secret)) continue;
+                            int lineNumber = GetLineNumber(content, match.Index);
 
-                            // 🔧 FILTRO POR FilterType (no por Id)
-                            if (!PassesFilter(rule.FilterType, secret)) continue;
+                            if (lineasAgregadas.Contains(lineNumber))
+                                continue;
 
-                            int secretIndex = GetSecretIndex(match);
+                            if (findings.Any(f => f.LineNumber == lineNumber && f.Secret == secret))
+                                continue;
+
+                            //  CALCULAR PUNTUACIÓN
+                            string lineContent = lineNumber >= 1 && lineNumber <= lines.Length
+                                ? lines[lineNumber - 1].Trim()
+                                : secret;
+
+                            var riskScore = _riskScoring.CalcularPuntuacion(lineContent, filePath);
+
+                            //  DIAGNÓSTICO
+                           // Logger.Info($"DIAGNÓSTICO: Regla {rule.Id} Línea {lineNumber} → {riskScore.Score} pts (umbral: {_umbralLog})", "", "");
+
+                            //  SOLO AGREGAR SI SUPERA EL UMBRAL
+                            if (riskScore.Score < _umbralLog)
+                                continue;
 
                             findings.Add(new CredentialFinding
                             {
                                 FilePath = filePath,
                                 RuleId = rule.Id,
-                                Description = rule.Description,
+                                Description = $"{rule.Description} ({riskScore.Score} pts)",
                                 Severity = rule.Severity,
                                 Secret = secret,
-                                LineNumber = GetLineNumber(content, secretIndex),
+                                LineNumber = lineNumber,
                                 FullMatch = match.Value
                             });
+
+                            lineasAgregadas.Add(lineNumber);
                         }
                     }
                     catch { }
                 }
+
+                //Logger.Info($"DIAGNÓSTICO: Total hallazgos: {findings.Count}", "", "");
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Logger.Error($"DIAGNÓSTICO ERROR: {ex.Message}", "", "");
+            }
 
             return findings;
         }
-
-    
-        private static bool PassesFilter(string filterType, string value)
-        {
-            if (string.IsNullOrEmpty(filterType)) return true;
-
-            switch (filterType.Trim().ToLowerInvariant())
-            {
-               // case "high_entropy":
-                 //   return IsHighEntropyWithSymbol(value);
-                //case "high_entropy_simple":
-                  //  return IsHighEntropySimple(value);
-                default:
-                    return true;
-            }
-        }
-
-        // high_entropy: 8+, mayús + minús + dígito + símbolo
-        private static bool IsHighEntropyWithSymbol(string value)
-        {
-            if (string.IsNullOrEmpty(value) || value.Length < 8) return false;
-
-            bool hasUpper = false, hasLower = false, hasDigit = false, hasSymbol = false;
-
-            foreach (var c in value)
-            {
-                if (char.IsUpper(c)) hasUpper = true;
-                else if (char.IsLower(c)) hasLower = true;
-                else if (char.IsDigit(c)) hasDigit = true;
-                else if (SymbolChars.IndexOf(c) >= 0) hasSymbol = true;
-            }
-
-            return hasUpper && hasLower && hasDigit && hasSymbol;
-        }
-
-        // high_entropy_simple: 8-32, mayús + minús + dígito
-        private static bool IsHighEntropySimple(string value)
-        {
-            if (string.IsNullOrEmpty(value)) return false;
-            if (value.Length < 8 || value.Length > 32) return false;   // 🔧 12 → 8
-
-            bool hasUpper = false, hasLower = false, hasDigit = false;
-
-            foreach (var c in value)
-            {
-                if (char.IsUpper(c)) hasUpper = true;
-                else if (char.IsLower(c)) hasLower = true;
-                else if (char.IsDigit(c)) hasDigit = true;
-            }
-
-            return hasUpper && hasLower && hasDigit;
-        }
-
-        private static string ExtractSecret(Match match)
-        {
-            string secret = match.Value;
-
-            for (int i = match.Groups.Count - 1; i >= 1; i--)
-            {
-                if (!string.IsNullOrEmpty(match.Groups[i].Value))
-                {
-                    secret = match.Groups[i].Value;
-                    break;
-                }
-            }
-
-            return secret.Trim().Trim('"', '\'', ' ', '\t', '\r', '\n');
-        }
-
-        private static int GetSecretIndex(Match match)
-        {
-            for (int i = match.Groups.Count - 1; i >= 1; i--)
-            {
-                if (!string.IsNullOrEmpty(match.Groups[i].Value))
-                    return match.Groups[i].Index;
-            }
-            return match.Index;
-        }
-
-        private bool IsWhitelisted(string value)
-        {
-            if (string.IsNullOrEmpty(value)) return true;
-            return _whitelist.Contains(value.Trim());
-        }
-
-        // ============================================================
-        // LÍNEA
-        // ============================================================
-        private int GetLineNumber(string content, int index)
-        {
-            if (index <= 0) return 1;
-            return content.AsSpan(0, index).ToString().Split('\n').Length;
-        }
-
-        // ============================================================
-        // EXCLUSIONES
-        // ============================================================
         public bool ShouldExcludeFile(string filePath)
         {
             if (string.IsNullOrEmpty(filePath)) return true;
@@ -190,7 +144,6 @@ namespace CredentialScanner.Services
             try
             {
                 var extension = Path.GetExtension(filePath).ToLowerInvariant();
-
                 if (_excludedExtensions.Contains(extension)) return true;
                 if (IsPathExcluded(filePath)) return true;
 
@@ -248,9 +201,6 @@ namespace CredentialScanner.Services
             return textExtensions.Contains(ext);
         }
 
-        // ============================================================
-        // ESPERA DE ARCHIVO
-        // ============================================================
         public async Task WaitForFileReady(string filePath, int maxRetries = 5)
         {
             for (int i = 0; i < maxRetries; i++)
@@ -263,6 +213,18 @@ namespace CredentialScanner.Services
                 catch (IOException) { await Task.Delay(200 * (i + 1)); }
                 catch { await Task.Delay(100); }
             }
+        }
+
+        private async Task<string> ReadFileAsync(string filePath)
+        {
+            try { return await File.ReadAllTextAsync(filePath, Encoding.UTF8); }
+            catch { try { return await File.ReadAllTextAsync(filePath, Encoding.Default); } catch { try { return await File.ReadAllTextAsync(filePath, Encoding.ASCII); } catch { return null; } } }
+        }
+
+        private int GetLineNumber(string content, int index)
+        {
+            if (index <= 0) return 1;
+            return content.AsSpan(0, index).ToString().Split('\n').Length;
         }
     }
 }

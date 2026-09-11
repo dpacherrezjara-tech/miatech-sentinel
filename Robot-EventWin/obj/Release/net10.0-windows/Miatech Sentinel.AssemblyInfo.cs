@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Miatech Sentinel")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e950597added03bb2d52bd3afefff6ff85427706")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac8bee5b98a8c6f877138fe421fe6b140bca3d0e")]
 [assembly: System.Reflection.AssemblyProductAttribute("Miatech Sentinel")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Miatech Sentinel")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

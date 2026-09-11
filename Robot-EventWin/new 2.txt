@@ -1,0 +1,24 @@
+IA ligera en contenedores doker, que grabe texto, credenciales de acceso ()
+C# 
+programs que dectecte , donde esta trabajando archivos de texto , detecte el evento de guardar ,  verifique si almaceno contraseñas o usuarios.
+
+Sistema -> detecta o hace un scaneo y verifica el contenido de los archivo en mi equipo ,contenido sea contraseñas o usuarios, generando un log global donde pondra fecha, ruta/nombre del archivo encontrado
+
+Tempor202@6 
+Qwertyuiop2
+dpacherrez
+USRWEBAV
+C7e4g9G3F
+XMAGALI
+G3R4N10S
+
+
+cDifrado de setup
+chill , notifique y que reanude el sistema./// ya esta por directivas de grupo.
+agregar exit puntual. para apagarlo se necesitara una token preferible / contraseña. -Terminado
+encendido automatico
+correo
+u : sap74d
+c : G3R4N10S 
+	D13G020E
+	Asdfghjklñ2

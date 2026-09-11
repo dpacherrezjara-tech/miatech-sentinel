@@ -1,0 +1,178 @@
+﻿2026-09-11T17:58:38.886-05:00 | INFO    |  |  | ═══════════════════════════════════════
+2026-09-11T17:58:38.892-05:00 | INFO    |  |  | Logger inicializado correctamente
+2026-09-11T17:58:38.892-05:00 | INFO    |  |  | Ruta: D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\Logs\MiatechSentinel.log
+2026-09-11T17:58:38.892-05:00 | INFO    |  |  | ═══════════════════════════════════════
+2026-09-11T17:58:38.972-05:00 | INFO    | LAP-DPACHERREZ | dpacherrez | Monitoreo iniciado
+2026-09-11T18:00:06.107-05:00 | INFO    |  |  | ═══════════════════════════════════════
+2026-09-11T18:00:06.113-05:00 | INFO    |  |  | Logger inicializado correctamente
+2026-09-11T18:00:06.113-05:00 | INFO    |  |  | Ruta: D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\Logs\MiatechSentinel.log
+2026-09-11T18:00:06.114-05:00 | INFO    |  |  | ═══════════════════════════════════════
+2026-09-11T18:00:06.191-05:00 | INFO    | LAP-DPACHERREZ | dpacherrez | Monitoreo iniciado
+2026-09-11T18:00:15.619-05:00 | INFO    |  |  | DIAGNÓSTICO: Archivo USUARIOS-CLAVES.txt tiene 177 líneas
+2026-09-11T18:00:15.629-05:00 | ERROR   |  |  | DIAGNÓSTICO ERROR: Invalid pattern '^[\-\=\_\*\#\~\s]+$' at offset 8. Unrecognized escape sequence \_.
+2026-09-11T18:00:27.927-05:00 | INFO    |  |  | DIAGNÓSTICO: Archivo USUARIOS-CLAVES.txt tiene 177 líneas
+2026-09-11T18:00:27.928-05:00 | ERROR   |  |  | DIAGNÓSTICO ERROR: Invalid pattern '^[\-\=\_\*\#\~\s]+$' at offset 8. Unrecognized escape sequence \_.
+2026-09-11T18:00:33.883-05:00 | INFO    |  |  | DIAGNÓSTICO: Archivo WaaSAssessmentSettings.json tiene 1 líneas
+2026-09-11T18:00:33.885-05:00 | INFO    |  |  | DIAGNÓSTICO: AnalyzeContent encontró 0 hallazgos
+2026-09-11T18:00:33.910-05:00 | INFO    |  |  | DIAGNÓSTICO: Total hallazgos: 0
+2026-09-11T18:01:11.799-05:00 | INFO    |  |  | DIAGNÓSTICO: Archivo gpt.ini tiene 7 líneas
+2026-09-11T18:01:11.800-05:00 | ERROR   |  |  | DIAGNÓSTICO ERROR: Invalid pattern '^[\-\=\_\*\#\~\s]+$' at offset 8. Unrecognized escape sequence \_.
+2026-09-11T18:01:12.290-05:00 | INFO    |  |  | DIAGNÓSTICO: Archivo gpt.ini tiene 7 líneas
+2026-09-11T18:01:12.291-05:00 | ERROR   |  |  | DIAGNÓSTICO ERROR: Invalid pattern '^[\-\=\_\*\#\~\s]+$' at offset 8. Unrecognized escape sequence \_.
+2026-09-11T18:01:12.792-05:00 | INFO    |  |  | DIAGNÓSTICO: Archivo gpt.ini tiene 7 líneas
+2026-09-11T18:01:12.795-05:00 | ERROR   |  |  | DIAGNÓSTICO ERROR: Invalid pattern '^[\-\=\_\*\#\~\s]+$' at offset 8. Unrecognized escape sequence \_.
+2026-09-11T18:01:13.203-05:00 | INFO    |  |  | DIAGNÓSTICO: Archivo oscfilter.ini tiene 9 líneas
+2026-09-11T18:01:13.204-05:00 | ERROR   |  |  | DIAGNÓSTICO ERROR: Invalid pattern '^[\-\=\_\*\#\~\s]+$' at offset 8. Unrecognized escape sequence \_.
+2026-09-11T18:01:13.443-05:00 | INFO    |  |  | DIAGNÓSTICO: Archivo gpt.ini tiene 5 líneas
+2026-09-11T18:01:13.445-05:00 | ERROR   |  |  | DIAGNÓSTICO ERROR: Invalid pattern '^[\-\=\_\*\#\~\s]+$' at offset 8. Unrecognized escape sequence \_.
+2026-09-11T18:01:45.264-05:00 | INFO    |  |  | ═══════════════════════════════════════
+2026-09-11T18:01:45.272-05:00 | INFO    |  |  | Logger inicializado correctamente
+2026-09-11T18:01:45.272-05:00 | INFO    |  |  | Ruta: D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\Logs\MiatechSentinel.log
+2026-09-11T18:01:45.272-05:00 | INFO    |  |  | ═══════════════════════════════════════
+2026-09-11T18:01:45.373-05:00 | INFO    | LAP-DPACHERREZ | dpacherrez | Monitoreo iniciado
+2026-09-11T18:01:57.940-05:00 | INFO    |  |  | DIAGNÓSTICO: Archivo USUARIOS-CLAVES.txt tiene 177 líneas
+2026-09-11T18:01:57.992-05:00 | INFO    |  |  | DIAGNÓSTICO: AnalyzeContent encontró 23 hallazgos
+2026-09-11T18:01:57.994-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 3 (130 pts): Contraseña: Qwertyuiop2
+2026-09-11T18:01:57.995-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 5 (180 pts): Pass : Tempor202@6
+2026-09-11T18:01:57.996-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 7 (80 pts): ps: Qwertyuiop2
+2026-09-11T18:01:57.996-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 13 (100 pts): username: temporal
+2026-09-11T18:01:57.997-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 15 (100 pts): user: dpacherrez
+2026-09-11T18:01:57.998-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 19 (100 pts): usuario:diegos
+2026-09-11T18:01:57.999-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 23 (100 pts): Tempor202@6
+2026-09-11T18:01:58.000-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 25 (80 pts): Qwertyuiop2 s
+2026-09-11T18:01:58.001-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 31 (80 pts): C7e4g9G3F
+2026-09-11T18:01:58.001-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 39 (100 pts): Tempor202@6
+2026-09-11T18:01:58.002-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 41 (80 pts): Qwertyuiop2
+2026-09-11T18:01:58.003-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 47 (80 pts): C7e4g9G3F hoa
+2026-09-11T18:01:58.004-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 61 (130 pts): password="v8CXdsKkPC5rP"
+2026-09-11T18:01:58.004-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 67 (100 pts): contraseña: temporal1
+2026-09-11T18:01:58.005-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 93 (100 pts): user: USRWEBAV
+2026-09-11T18:01:58.006-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 95 (130 pts): pass: C7e4g9G3F
+2026-09-11T18:01:58.006-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 145 (100 pts): Pr0c3s02029@
+2026-09-11T18:01:58.007-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 157 (100 pts): USERNAME: USRWEB
+2026-09-11T18:01:58.008-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 159 (100 pts): PASS: WRSE001B
+2026-09-11T18:01:58.008-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 165 (100 pts): USERNAME: SAP13T
+2026-09-11T18:01:58.009-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 167 (100 pts): PASS: ZXCVBNM6
+2026-09-11T18:01:58.010-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 171 (100 pts): user: USRWEBAV
+2026-09-11T18:01:58.010-05:00 | INFO    |  |  | DIAGNÓSTICO: Riesgo Línea 173 (130 pts): pass: C7e4g9G3F
+2026-09-11T18:01:58.012-05:00 | INFO    |  |  | DIAGNÓSTICO: Regla usuario-colon Línea 8 → 0 pts (umbral: 80)
+2026-09-11T18:01:58.013-05:00 | INFO    |  |  | DIAGNÓSTICO: Regla usuario-colon Línea 10 → 0 pts (umbral: 80)
+2026-09-11T18:01:58.014-05:00 | INFO    |  |  | DIAGNÓSTICO: Regla usuario-colon Línea 79 → 40 pts (umbral: 80)
+2026-09-11T18:01:58.015-05:00 | INFO    |  |  | DIAGNÓSTICO: Regla usuario-colon Línea 83 → 70 pts (umbral: 80)
+2026-09-11T18:01:58.016-05:00 | INFO    |  |  | DIAGNÓSTICO: Regla usuario-colon Línea 86 → 0 pts (umbral: 80)
+2026-09-11T18:01:58.017-05:00 | INFO    |  |  | DIAGNÓSTICO: Regla git-user Línea 65 → 50 pts (umbral: 80)
+2026-09-11T18:01:58.018-05:00 | INFO    |  |  | DIAGNÓSTICO: Regla contrasena-colon Línea 2 → 0 pts (umbral: 80)
+2026-09-11T18:01:58.019-05:00 | INFO    |  |  | DIAGNÓSTICO: Regla contrasena-colon Línea 34 → 0 pts (umbral: 80)
+2026-09-11T18:01:58.020-05:00 | INFO    |  |  | DIAGNÓSTICO: Regla contrasena-colon Línea 48 → 0 pts (umbral: 80)
+2026-09-11T18:01:58.020-05:00 | INFO    |  |  | DIAGNÓSTICO: Regla contrasena-colon Línea 80 → 0 pts (umbral: 80)
+2026-09-11T18:01:58.021-05:00 | INFO    |  |  | DIAGNÓSTICO: Regla contrasena-colon Línea 84 → 0 pts (umbral: 80)
+2026-09-11T18:01:58.022-05:00 | INFO    |  |  | DIAGNÓSTICO: Regla contrasena-colon Línea 87 → 60 pts (umbral: 80)
+2026-09-11T18:01:58.023-05:00 | INFO    |  |  | DIAGNÓSTICO: Regla user-pass-line Línea 86 → 0 pts (umbral: 80)
+2026-09-11T18:01:58.027-05:00 | INFO    |  |  | DIAGNÓSTICO: Total hallazgos: 23
+2026-09-11T18:01:58.029-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 3: Contraseña: Qwertyuiop2 | Puntuación de riesgo ALTA (130 pts)
+2026-09-11T18:01:58.030-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 5: Pass : Tempor202@6 | Puntuación de riesgo ALTA (180 pts)
+2026-09-11T18:01:58.031-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 7: ps: Qwertyuiop2 | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:01:58.031-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 13: username: temporal | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:01:58.032-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 15: user: dpacherrez | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:01:58.033-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 19: usuario:diegos | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:01:58.033-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 23: Tempor202@6 | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:01:58.034-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 25: Qwertyuiop2 s | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:01:58.035-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 31: C7e4g9G3F | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:01:58.036-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 39: Tempor202@6 | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:01:58.036-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 41: Qwertyuiop2 | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:01:58.037-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 47: C7e4g9G3F hoa | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:01:58.038-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 61: password="v8CXdsKkPC5rP" | Puntuación de riesgo ALTA (130 pts)
+2026-09-11T18:01:58.038-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 67: contraseña: temporal1 | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:01:58.039-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 93: user: USRWEBAV | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:01:58.040-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 95: pass: C7e4g9G3F | Puntuación de riesgo ALTA (130 pts)
+2026-09-11T18:01:58.041-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 145: Pr0c3s02029@ | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:01:58.042-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 157: USERNAME: USRWEB | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:01:58.042-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 159: PASS: WRSE001B | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:01:58.043-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 165: USERNAME: SAP13T | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:01:58.043-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 167: PASS: ZXCVBNM6 | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:01:58.043-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 171: user: USRWEBAV | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:01:58.043-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 173: pass: C7e4g9G3F | Puntuación de riesgo ALTA (130 pts)
+2026-09-11T18:02:41.292-05:00 | INFO    |  |  | DIAGNÓSTICO: Archivo daemon.json tiene 13 líneas
+2026-09-11T18:02:41.294-05:00 | INFO    |  |  | DIAGNÓSTICO: AnalyzeContent encontró 0 hallazgos
+2026-09-11T18:02:41.296-05:00 | INFO    |  |  | DIAGNÓSTICO: Total hallazgos: 0
+2026-09-11T18:02:41.303-05:00 | INFO    |  |  | DIAGNÓSTICO: Archivo windows-daemon.json tiene 4 líneas
+2026-09-11T18:02:41.305-05:00 | INFO    |  |  | DIAGNÓSTICO: AnalyzeContent encontró 0 hallazgos
+2026-09-11T18:02:41.307-05:00 | INFO    |  |  | DIAGNÓSTICO: Total hallazgos: 0
+2026-09-11T18:05:35.378-05:00 | INFO    |  |  | ═══════════════════════════════════════
+2026-09-11T18:05:35.382-05:00 | INFO    |  |  | Logger inicializado correctamente
+2026-09-11T18:05:35.382-05:00 | INFO    |  |  | Ruta: D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\Logs\MiatechSentinel.log
+2026-09-11T18:05:35.382-05:00 | INFO    |  |  | ═══════════════════════════════════════
+2026-09-11T18:05:35.432-05:00 | INFO    | LAP-DPACHERREZ | dpacherrez | Monitoreo iniciado
+2026-09-11T18:05:57.504-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 3: Contraseña: Qwertyuiop2 | Puntuación de riesgo ALTA (130 pts)
+2026-09-11T18:05:57.505-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 5: Pass : Tempor202@6 | Puntuación de riesgo ALTA (180 pts)
+2026-09-11T18:05:57.505-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 7: ps: Qwertyuiop2 | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:05:57.506-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 13: username: temporal | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:05:57.506-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 15: user: dpacherrez | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:05:57.507-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 19: usuario:diegos | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:05:57.507-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 23: Tempor202@6 | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:05:57.507-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 25: Qwertyuiop2 s | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:05:57.508-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 31: C7e4g9G3F | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:05:57.508-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 49: Tempor202@6 | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:05:57.509-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 51: Qwertyuiop2 | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:05:57.509-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 57: C7e4g9G3F | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:05:57.510-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 71: password="v8CXdsKkPC5rP" | Puntuación de riesgo ALTA (130 pts)
+2026-09-11T18:05:57.511-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 77: contraseña: temporal1 | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:05:57.511-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 103: user: USRWEBAV | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:05:57.512-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 105: pass: C7e4g9G3F | Puntuación de riesgo ALTA (130 pts)
+2026-09-11T18:05:57.512-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 155: Pr0c3s02029@ | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:05:57.513-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 167: USERNAME: USRWEB | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:05:57.514-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 169: PASS: WRSE001B | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:05:57.515-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 175: USERNAME: SAP13T | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:05:57.515-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 177: PASS: ZXCVBNM6 | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:05:57.516-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 181: user: USRWEBAV | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:05:57.516-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 183: pass: C7e4g9G3F | Puntuación de riesgo ALTA (130 pts)
+2026-09-11T18:07:17.899-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 3: Contraseña: Qwertyuiop2 | Puntuación de riesgo ALTA (130 pts)
+2026-09-11T18:07:17.900-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 5: Pass : Tempor202@6 | Puntuación de riesgo ALTA (180 pts)
+2026-09-11T18:07:17.901-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 7: ps: Qwertyuiop2 | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:07:17.901-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 13: username: temporal | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:17.904-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 15: user: dpacherrez | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:17.904-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 19: usuario:diegos | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:17.905-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 23: Tempor202@6 | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:17.906-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 25: Qwertyuiop2 s | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:07:17.907-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 31: C7e4g9G3F | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:07:17.908-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 49: Tempor202@6 | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:17.910-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 51: Qwertyuiop2 | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:07:17.915-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 57: C7e4g9G3F | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:07:17.915-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 71: password="v8CXdsKkPC5rP" | Puntuación de riesgo ALTA (130 pts)
+2026-09-11T18:07:17.916-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 77: contraseña: temporal1 | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:17.917-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 103: user: USRWEBAV | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:17.918-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 105: pass: C7e4g9G3F | Puntuación de riesgo ALTA (130 pts)
+2026-09-11T18:07:17.918-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 155: Pr0c3s02029@ | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:17.919-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 167: USERNAME: USRWEB | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:17.920-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 169: PASS: WRSE001B | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:17.920-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 175: USERNAME: SAP13T | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:17.921-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 177: PASS: ZXCVBNM6 | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:17.921-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 181: user: USRWEBAV | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:17.921-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 183: pass: C7e4g9G3F | Puntuación de riesgo ALTA (130 pts)
+2026-09-11T18:07:37.875-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 3: Contraseña: Qwertyuiop2 | Puntuación de riesgo ALTA (130 pts)
+2026-09-11T18:07:37.878-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 5: Pass : Tempor202@6 | Puntuación de riesgo ALTA (180 pts)
+2026-09-11T18:07:37.880-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 7: ps: Qwertyuiop2 | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:07:37.881-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 13: username: temporal | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:37.883-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 15: user: dpacherrez | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:37.884-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 19: usuario:diegos | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:37.886-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 23: Tempor202@6 | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:37.887-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 25: Qwertyuiop2 s | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:07:37.888-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 31: C7e4g9G3F | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:07:37.888-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 39: IA ligera en usuario: sap74d contenedores doker, que grabe t... | Puntuación de riesgo MEDIA (90 pts)
+2026-09-11T18:07:37.889-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 49: Tempor202@6 | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:37.890-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 51: Qwertyuiop2 | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:07:37.891-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [Medium] USUARIOS-CLAVES.txt | Línea 57: C7e4g9G3F | Puntuación de riesgo MEDIA (80 pts)
+2026-09-11T18:07:37.891-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 71: password="v8CXdsKkPC5rP" | Puntuación de riesgo ALTA (130 pts)
+2026-09-11T18:07:37.893-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 77: contraseña: temporal1 | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:37.893-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 103: user: USRWEBAV | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:37.894-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 105: pass: C7e4g9G3F | Puntuación de riesgo ALTA (130 pts)
+2026-09-11T18:07:37.895-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 155: Pr0c3s02029@ | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:37.896-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 167: USERNAME: USRWEB | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:37.897-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 169: PASS: WRSE001B | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:37.897-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 175: USERNAME: SAP13T | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:37.899-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 177: PASS: ZXCVBNM6 | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:37.901-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 181: user: USRWEBAV | Puntuación de riesgo ALTA (100 pts)
+2026-09-11T18:07:37.902-05:00 | ALERT   | LAP-DPACHERREZ | dpacherrez | [High] USUARIOS-CLAVES.txt | Línea 183: pass: C7e4g9G3F | Puntuación de riesgo ALTA (130 pts)
+2026-09-11T18:09:54.450-05:00 | WARNING | LAP-DPACHERREZ | dpacherrez | Intento de detener monitoreo sin autorización
+2026-09-11T18:10:13.902-05:00 | INFO    | LAP-DPACHERREZ | dpacherrez | Detención de monitoreo autorizada con token
+2026-09-11T18:10:13.903-05:00 | INFO    | LAP-DPACHERREZ | dpacherrez | Monitoreo detenido

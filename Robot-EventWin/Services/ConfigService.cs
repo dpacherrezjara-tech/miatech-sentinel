@@ -31,49 +31,25 @@ namespace CredentialScanner.Services
                 foreach (var line in lines)
                 {
                     var trimmed = line.Trim();
+                    trimmed = trimmed.TrimStart('\uFEFF'); // Eliminar BOM
 
                     if (string.IsNullOrEmpty(trimmed) || trimmed.StartsWith(";") || trimmed.StartsWith("#"))
                         continue;
 
                     if (trimmed.StartsWith("[") && trimmed.EndsWith("]"))
                     {
-                        currentSection = trimmed.TrimStart('[').TrimEnd(']');
+                        currentSection = trimmed.TrimStart('[').TrimEnd(']').Trim();
                         continue;
                     }
 
-                    int sepIdx = -1;
-                    char sepUsed = '\0';
-
-                    int iSection = trimmed.IndexOf(FieldSeparator);
-                    if (iSection > 0) { sepIdx = iSection; sepUsed = FieldSeparator; }
-
-                    if (sepIdx < 0)
-                    {
-                        int iEq = trimmed.IndexOf('=');
-                        if (iEq > 0) { sepIdx = iEq; sepUsed = '='; }
-                    }
-
-                    if (sepIdx < 0)
-                    {
-                        int iColon = trimmed.IndexOf(':');
-                        if (iColon > 0) { sepIdx = iColon; sepUsed = ':'; }
-                    }
-
-                    if (sepIdx < 0)
-                    {
-                        int iPipe = trimmed.IndexOf('|');
-                        if (iPipe > 0) { sepIdx = iPipe; sepUsed = '|'; }
-                    }
-
+                    // 🔴 TODAS las líneas usan § como separador
+                    int sepIdx = trimmed.IndexOf(FieldSeparator);
                     if (sepIdx <= 0) continue;
 
                     var key = trimmed.Substring(0, sepIdx).Trim();
                     var value = trimmed.Substring(sepIdx + 1).Trim();
 
                     if (string.IsNullOrEmpty(key)) continue;
-
-                    if (sepUsed == '|' && key.StartsWith("RULES", StringComparison.OrdinalIgnoreCase))
-                        continue;
 
                     var fullKey = string.IsNullOrEmpty(currentSection) ? key : $"{currentSection}:{key}";
                     _config[fullKey] = value;
@@ -141,20 +117,10 @@ namespace CredentialScanner.Services
 
                 if (parts.Length < 4) continue;
 
-                // 🔧 FIX: parsear correctamente los 5 campos
-                // Formato: ID § Descripción § Regex § Severidad § FilterType
-                // El regex puede contener § (raro), así que tomamos desde parts[2]
-                // hasta parts[Length-2], y severidad y filterType de los últimos.
-
-                string id;
-                string description;
-                string pattern;
-                string severity;
-                string filterType;
+                string id, description, pattern, severity, filterType;
 
                 if (parts.Length == 4)
                 {
-                    // Sin FilterType
                     id = parts[0].Trim();
                     description = parts[1].Trim();
                     pattern = parts[2].Trim();
@@ -163,7 +129,6 @@ namespace CredentialScanner.Services
                 }
                 else if (parts.Length == 5)
                 {
-                    // Con FilterType
                     id = parts[0].Trim();
                     description = parts[1].Trim();
                     pattern = parts[2].Trim();
@@ -172,7 +137,6 @@ namespace CredentialScanner.Services
                 }
                 else
                 {
-                    // Más de 5 partes: el regex contenía §. Rearmamos.
                     id = parts[0].Trim();
                     description = parts[1].Trim();
                     pattern = string.Join(FieldSeparator.ToString(), parts.Skip(2).Take(parts.Length - 4)).Trim();
@@ -188,7 +152,7 @@ namespace CredentialScanner.Services
                     Description = description,
                     Pattern = pattern,
                     Severity = severity,
-                    FilterType = string.IsNullOrEmpty(filterType) ? null : filterType   // 
+                    FilterType = string.IsNullOrEmpty(filterType) ? null : filterType
                 });
             }
 

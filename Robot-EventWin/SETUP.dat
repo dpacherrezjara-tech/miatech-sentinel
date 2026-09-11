@@ -1,45 +1,76 @@
+# ============================================================
+# CONFIGURACIÓN DEL SCANNER - MIATECH SENTINEL
+# ============================================================
+
 [SCANNER_SETTINGS]
-MAX_FILE_SIZE_MB§100
-EXCLUDED_PATHS§C:\Windows;C:\Program Files;C:\Program Files (x86);C:\ProgramData;D:\REPROSITORIO-GIT\NET\miatech-sentinel; C:\Users\dpacherrez\AppData\;C:\Users\dpacherrez\.docker\
+MAX_FILE_SIZE_MB § 100
+EXCLUDED_PATHS § C:\Windows;C:\Program Files;C:\Program Files (x86);C:\Users\dpacherrez\AppData;D:\REPROSITORIO-GIT
+EXCLUDED_EXTENSIONS § .exe;.dll;.msi;.tmp;.cache;.mp3;.mp4;.jpg;.jpeg;.png;.gif;.pdf;.doc;.docx;.zip;.rar;.7z;.iso;.bin;.dat;.pem;.key;.crt;.cer;.log;.cache;.bak;.jar;.xml;.html;.cs;.vb;.fs;.js;.ts;.py;.java;.c;.cpp;.h;.csproj;.sln
 
-EXCLUDED_EXTENSIONS§.exe;.dll;.msi;.tmp;.cache;.mp3;.mp4;.jpg;.jpeg;.png;.gif;.pdf;.doc;.docx;.zip;.rar;.7z;.iso;.bin;.dat;.pem;.key;.crt;.cer;.log;.cache;.bak;.jar
-
-WHITELIST_VALUES§true;false;null;none;yes;no;on;off;admin;usuario;root;test;demo;example;experimental;localhost;userpass;127.0.0.1;0.0.0.0;utf-8;utf8;json;xml;yaml;html;csv;get;post;put;delete;http;https;ftp;ssh;temp;tmp;logs;log;bin;obj;configuracion;madrid;lunes;martes;miercoles;jueves;viernes;sabado;domingo;enero;febrero;marzo;abril;mayo;junio;julio;agosto;septiembre;octubre;noviembre;diciembre;activo;inactivo;habilitado;deshabilitado;verdadero;falso;nombre;apellido;direccion;telefono;correo;email;version;version1;version2;config;setting;servidor;servicio;aplicacion;seguridad;sistema;equipo;documento;archivo;carpeta;select;from;where;join;union;update;insert;delete;create;table;database
+# ============================================================
+# REGLAS
+# ============================================================
 
 [SCANNER_RULES]
+RULES1 § usuario-colon § Detecta usuario: valor § (?i)(?:usuario|user(?:name)?)\s*[:=]\s*["'""]?([A-Za-z0-9_\-.@]{3,})["'""]? § High
+RULES2 § contrasena-colon § Detecta contraseña: valor § (?i)(?:contraseña|password|pass|clave|pwd)\s*[:=]\s*["'""]?([A-Za-z0-9_\-.@#$%^&*!]{4,})["'""]? § High
+RULES3 § user-pass-line § Detecta user:pass § (?i)user\s*[:=]\s*([^\s,;]{3,})\s*[,;]?\s*pass\s*[:=]\s*([^\s,;]{3,}) § High
+RULES4 § u-c-line § Detecta u: X c: Y § (?i)\bu\s*[:=]\s*([A-Za-z0-9_\-.@]{3,})\s*[,;]?\s*c\s*[:=]\s*([A-Za-z0-9_\-.@#$%^&*!]{4,}) § High
+RULES5 § password-quotes § Detecta password="valor" § password\s*=\s*["'""]([^""']{4,})["'""] § High
+RULES6 § api-key § Detecta API Key § (?i)(?:api[_-]?key|apikey)\s*[:=]\s*["'""]?(sk_(?:live|test)_[A-Za-z0-9]{20,})["'""]? § High
+RULES7 § token-jwt § Detecta Token JWT § eyJ[A-Za-z0-9_\-]+\.[A-Za-z0-9_\-]+\.[A-Za-z0-9_\-]+ § High
+RULES8 § secret § Detecta Secret § (?i)(?:secret|client[_-]?secret)\s*[:=]\s*["'""]?([A-Za-z0-9_\-]{16,})["'""]? § High
+RULES9 § ip-puerto § Detecta IP:Puerto § (?:\d{1,3}\.){3}\d{1,3}:\d{2,5} § High
+#RULES10 § direccion-ip § Detecta dirección IP § (?i)direccion\s*(?:destino)?\s*[:=]\s*((?:\d{1,3}\.){3}\d{1,3}) § High
+RULES11 § db-credenciales § Detecta credenciales DB § (?i)(?:base\s*de\s*datos|database|db)\s*[:=]\s*[A-Za-z0-9_\-]{3,} § High
+RULES12 § git-user § Detecta usuario Git § usr_mi_[A-Za-z0-9_\-]{10,} § High
+RULES13 § sql-grant § Detecta GRANT § (?i)GRANT\s+ALL\s+ON\s+PROCEDURE\s+[A-Za-z0-9_.]+\s+TO\s+[A-Za-z0-9_]+ § High
 
-RULES1§credencial_generica§Detecta strings de 7+ caracteres§\b[A-Za-z][A-Za-z0-9@$#%!*?&_.\-]{6,63}\b§Low§generic_credential
+# ============================================================
+# PUNTUACIÓN DE RIESGO
+# ============================================================
 
-R#ULES1§credencial_con_arroba§credencial con mayus+minus+digito+arroba§\b(?=[A-Za-z0-9@$#%!*?&_.\-]{7,64}\b)(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*@)[A-Za-z0-9@$#%!*?&_.\-]{7,64}\b§Medium§
+[RISK_SCORING]
+UMBRAL_INFO § 40
+UMBRAL_WARNING § 70
+UMBRAL_ALERT § 100
 
-#RULES2§credencial_mixta§credencial con mayus+minus+digito§\b(?=[A-Za-z0-9]{7,32}\b)(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z0-9]{7,32}\b§Medium§
+UMBRAL_LOG § 80
 
-#RULES3§usuario_minusculas§usuario en minusculas§\b[a-z][a-z0-9_\-]{6,15}\b§Low§
+PUNTOS_ETIQUETA § 50
+PUNTOS_FORMATO_CONTRASENA § 30
+PUNTOS_SIMBOLO § 20
+PUNTOS_LONGITUD § 10
+PUNTOS_ARCHIVO_SOSPECHOSO § 30
+PUNTOS_BLOQUE § 30
+PUNTOS_NO_PALABRA_COMUN § 10
 
-#RULES4§usuario_usr§usuario con prefijo USR§\bUSR[A-Z0-9_]{2,15}\b§Medium§
+PALABRAS_COMUNES § config;setting;option;value;default;system;window;button;label;panel;form;text;name;title;version;color;size;location;path;file;folder;directory;message;error;warning;info;debug;test;example;sample;demo;hello;world;foo;bar;baz;true;false;null;void;return;public;private;protected;static;class;interface;method;function;variable;object;string;integer;boolean;array;list;dictionary;using;namespace;import;export;package;module
 
-#RULES5§palabra_mayusculas§palabra en mayusculas§\b[A-Z]{7,20}\b§Low§
+ARCHIVOS_SOSPECHOSOS § credencial;password;contraseña;clave;pass;user;usuario;login;auth;secret;token;key;access
+
+# ============================================================
+# MONITOREO
+# ============================================================
 
 [MONITOR_SETTINGS]
+ENABLE_MONITORING § true
+MONITOR_ALL_DRIVES § true
+MONITOR_SPECIFIC_PATHS § 
+AUTO_START § true
 
-ENABLE_MONITORING§true
-
-MONITOR_ALL_DRIVES§true
-
-MONITOR_SPECIFIC_PATHS§
-
-AUTO_START§true
+# ============================================================
+# LOGS
+# ============================================================
 
 [LOG_SETTINGS]
+LOG_PATH § D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\Logs
+LOG_FILE_NAME § MiatechSentinel.log
+LOG_LEVEL § Info
 
-LOG_PATH§D:\REPROSITORIO-GIT\CredentialScanner\Logs
-
-LOG_FILE_NAME§MiatechSentinel.log
-
-LOG_LEVEL§Info
-
-LOG_MASK_SECRETS§true
+# ============================================================
+# SEGURIDAD
+# ============================================================
 
 [SECURITY_SETTINGS]
-
-EXIT_TOKEN§Pr0c3s02029@
+EXIT_TOKEN § Pr0c3s02029@

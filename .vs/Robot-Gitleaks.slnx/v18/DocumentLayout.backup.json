@@ -3,6 +3,17 @@
   "WorkspaceRootPath": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E2D9C66F-DB7B-41FC-B8B0-C3274B735650}|Robot-EventWin\\Miatech Sentinel.csproj|d:\\reprositorio-git\\net\\miatech-sentinel\\robot-eventwin\\services\\riskscoringservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2D9C66F-DB7B-41FC-B8B0-C3274B735650}|Robot-EventWin\\Miatech Sentinel.csproj|solutionrelative:robot-eventwin\\services\\riskscoringservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2D9C66F-DB7B-41FC-B8B0-C3274B735650}|Robot-EventWin\\Miatech Sentinel.csproj|d:\\reprositorio-git\\net\\miatech-sentinel\\robot-eventwin\\services\\credentialscannerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2D9C66F-DB7B-41FC-B8B0-C3274B735650}|Robot-EventWin\\Miatech Sentinel.csproj|solutionrelative:robot-eventwin\\services\\credentialscannerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Program Files\\Microsoft Visual Studio\\18\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E2D9C66F-DB7B-41FC-B8B0-C3274B735650}|Robot-EventWin\\Miatech Sentinel.csproj|d:\\reprositorio-git\\net\\miatech-sentinel\\robot-eventwin\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E2D9C66F-DB7B-41FC-B8B0-C3274B735650}|Robot-EventWin\\Miatech Sentinel.csproj|solutionrelative:robot-eventwin\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,24 +22,12 @@
       "RelativeMoniker": "D:0:0:{E2D9C66F-DB7B-41FC-B8B0-C3274B735650}|Robot-EventWin\\Miatech Sentinel.csproj|solutionrelative:robot-eventwin\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E2D9C66F-DB7B-41FC-B8B0-C3274B735650}|Robot-EventWin\\Miatech Sentinel.csproj|d:\\reprositorio-git\\net\\miatech-sentinel\\robot-eventwin\\services\\credentialscannerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E2D9C66F-DB7B-41FC-B8B0-C3274B735650}|Robot-EventWin\\Miatech Sentinel.csproj|solutionrelative:robot-eventwin\\services\\credentialscannerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E2D9C66F-DB7B-41FC-B8B0-C3274B735650}|Robot-EventWin\\Miatech Sentinel.csproj|d:\\reprositorio-git\\net\\miatech-sentinel\\robot-eventwin\\models\\riskscore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2D9C66F-DB7B-41FC-B8B0-C3274B735650}|Robot-EventWin\\Miatech Sentinel.csproj|solutionrelative:robot-eventwin\\models\\riskscore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E2D9C66F-DB7B-41FC-B8B0-C3274B735650}|Robot-EventWin\\Miatech Sentinel.csproj|d:\\reprositorio-git\\net\\miatech-sentinel\\robot-eventwin\\setup.dat||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{E2D9C66F-DB7B-41FC-B8B0-C3274B735650}|Robot-EventWin\\Miatech Sentinel.csproj|solutionrelative:robot-eventwin\\setup.dat||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E2D9C66F-DB7B-41FC-B8B0-C3274B735650}|Robot-EventWin\\Miatech Sentinel.csproj|d:\\reprositorio-git\\net\\miatech-sentinel\\robot-eventwin\\services\\configservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E2D9C66F-DB7B-41FC-B8B0-C3274B735650}|Robot-EventWin\\Miatech Sentinel.csproj|solutionrelative:robot-eventwin\\services\\configservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E2D9C66F-DB7B-41FC-B8B0-C3274B735650}|Robot-EventWin\\Miatech Sentinel.csproj|d:\\reprositorio-git\\net\\miatech-sentinel\\robot-eventwin\\models\\credentialrule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E2D9C66F-DB7B-41FC-B8B0-C3274B735650}|Robot-EventWin\\Miatech Sentinel.csproj|solutionrelative:robot-eventwin\\models\\credentialrule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E6E172E2-92A5-2344-0796-6CB7C74A3623}|Robot-Gitleaks\\Robot-Gitleaks.csproj|d:\\reprositorio-git\\net\\miatech-sentinel\\robot-gitleaks\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E6E172E2-92A5-2344-0796-6CB7C74A3623}|Robot-Gitleaks\\Robot-Gitleaks.csproj|solutionrelative:robot-gitleaks\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E2D9C66F-DB7B-41FC-B8B0-C3274B735650}|Robot-EventWin\\Miatech Sentinel.csproj|d:\\reprositorio-git\\net\\miatech-sentinel\\robot-eventwin\\utils\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2D9C66F-DB7B-41FC-B8B0-C3274B735650}|Robot-EventWin\\Miatech Sentinel.csproj|solutionrelative:robot-eventwin\\utils\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,11 +37,63 @@
       "DocumentGroups": [
         {
           "DockedWidth": 471,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "CredentialScannerService.cs",
+              "DocumentMoniker": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Services\\CredentialScannerService.cs",
+              "RelativeDocumentMoniker": "Robot-EventWin\\Services\\CredentialScannerService.cs",
+              "ToolTip": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Services\\CredentialScannerService.cs",
+              "RelativeToolTip": "Robot-EventWin\\Services\\CredentialScannerService.cs",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAiwIoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-11T22:53:24.455Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RiskScoringService.cs",
+              "DocumentMoniker": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Services\\RiskScoringService.cs",
+              "RelativeDocumentMoniker": "Robot-EventWin\\Services\\RiskScoringService.cs",
+              "ToolTip": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Services\\RiskScoringService.cs",
+              "RelativeToolTip": "Robot-EventWin\\Services\\RiskScoringService.cs",
+              "ViewState": "AgIAAO8AAAAAAAAAAAAiwAkBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-11T22:46:39.695Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Microsoft.Common.CurrentVersion.targets",
+              "DocumentMoniker": "D:\\Program Files\\Microsoft Visual Studio\\18\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\Program Files\\Microsoft Visual Studio\\18\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ToolTip": "D:\\Program Files\\Microsoft Visual Studio\\18\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeToolTip": "..\\..\\..\\Program Files\\Microsoft Visual Studio\\18\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ViewState": "AgIAAD4VAAAAAAAAAAAgwFQVAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2026-09-11T22:55:06.543Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RiskScore.cs",
+              "DocumentMoniker": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Models\\RiskScore.cs",
+              "RelativeDocumentMoniker": "Robot-EventWin\\Models\\RiskScore.cs",
+              "ToolTip": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Models\\RiskScore.cs",
+              "RelativeToolTip": "Robot-EventWin\\Models\\RiskScore.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-11T22:25:59.136Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "MainForm.cs [Dise\u00F1o]",
               "DocumentMoniker": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Forms\\MainForm.cs",
               "RelativeDocumentMoniker": "Robot-EventWin\\Forms\\MainForm.cs",
@@ -55,79 +106,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "SETUP.dat",
-              "DocumentMoniker": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\SETUP.dat",
-              "RelativeDocumentMoniker": "Robot-EventWin\\SETUP.dat",
-              "ToolTip": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\SETUP.dat",
-              "RelativeToolTip": "Robot-EventWin\\SETUP.dat",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA/AgAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-09-11T19:11:58.648Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CredentialRule.cs",
-              "DocumentMoniker": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Models\\CredentialRule.cs",
-              "RelativeDocumentMoniker": "Robot-EventWin\\Models\\CredentialRule.cs",
-              "ToolTip": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Models\\CredentialRule.cs",
-              "RelativeToolTip": "Robot-EventWin\\Models\\CredentialRule.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-11T19:47:45.128Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "MainForm.cs",
               "DocumentMoniker": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Forms\\MainForm.cs",
               "RelativeDocumentMoniker": "Robot-EventWin\\Forms\\MainForm.cs",
               "ToolTip": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Forms\\MainForm.cs",
               "RelativeToolTip": "Robot-EventWin\\Forms\\MainForm.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAswFQAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAAAcDAAAAAAAAAAAiwBADAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-09-11T15:49:42.724Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CredentialScannerService.cs",
-              "DocumentMoniker": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Services\\CredentialScannerService.cs",
-              "RelativeDocumentMoniker": "Robot-EventWin\\Services\\CredentialScannerService.cs",
-              "ToolTip": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Services\\CredentialScannerService.cs",
-              "RelativeToolTip": "Robot-EventWin\\Services\\CredentialScannerService.cs",
-              "ViewState": "AgIAAOQAAAAAAAAAAAApwPEAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-11T17:42:40.906Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ConfigService.cs",
-              "DocumentMoniker": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Services\\ConfigService.cs",
-              "RelativeDocumentMoniker": "Robot-EventWin\\Services\\ConfigService.cs",
-              "ToolTip": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Services\\ConfigService.cs",
-              "RelativeToolTip": "Robot-EventWin\\Services\\ConfigService.cs",
-              "ViewState": "AgIAALEAAAAAAAAAAAAswMIAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-11T15:45:42.977Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-Gitleaks\\Program.cs",
-              "RelativeDocumentMoniker": "Robot-Gitleaks\\Program.cs",
-              "ToolTip": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-Gitleaks\\Program.cs",
-              "RelativeToolTip": "Robot-Gitleaks\\Program.cs",
-              "ViewState": "AgIAABMBAAAAAAAAAAAAADQBAAAzAAAAAAAAAA==",
+              "Title": "Logger.cs",
+              "DocumentMoniker": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Utils\\Logger.cs",
+              "RelativeDocumentMoniker": "Robot-EventWin\\Utils\\Logger.cs",
+              "ToolTip": "D:\\REPROSITORIO-GIT\\NET\\miatech-sentinel\\Robot-EventWin\\Utils\\Logger.cs",
+              "RelativeToolTip": "Robot-EventWin\\Utils\\Logger.cs",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAawCYAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-11T19:45:10.448Z",
+              "WhenOpened": "2026-09-11T22:14:14.541Z",
               "EditorCaption": ""
             }
           ]
