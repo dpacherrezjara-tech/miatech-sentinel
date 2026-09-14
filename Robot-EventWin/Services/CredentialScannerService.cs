@@ -1,4 +1,4 @@
-﻿using CredentialScanner.Models;
+using CredentialScanner.Models;
 using CredentialScanner.Utils;
 using System;
 using System.Collections.Generic;
@@ -41,33 +41,8 @@ namespace CredentialScanner.Services
                 var lines = content.Split(new[] { '\r', '\n' }, StringSplitOptions.None);
                 var lineasAgregadas = new HashSet<int>();
 
-                // 🔴 DIAGNÓSTICO: Cuántas líneas se van a analizar
-                //Logger.Info($"DIAGNÓSTICO: Archivo {Path.GetFileName(filePath)} tiene {lines.Length} líneas", "", "");
-
-                // 🔴 1. PUNTUACIÓN DE RIESGO
-                var riskScores = _riskScoring.AnalyzeContent(content, filePath);
-
-              //  Logger.Info($"DIAGNÓSTICO: AnalyzeContent encontró {riskScores.Count} hallazgos", "", "");
-
-                foreach (var risk in riskScores)
-                {
-                    //Logger.Info($"DIAGNÓSTICO: Riesgo Línea {risk.LineNumber} ({risk.Score} pts): {risk.Line}", "", "");
-
-                    findings.Add(new CredentialFinding
-                    {
-                        FilePath = filePath,
-                        RuleId = risk.RuleId,
-                        Description = $"{risk.Description} ({risk.Score} pts)",
-                        Severity = risk.Severity,
-                        Secret = risk.Line,
-                        LineNumber = risk.LineNumber,
-                        FullMatch = risk.Line
-                    });
-
-                    lineasAgregadas.Add(risk.LineNumber);
-                }
-
-                // 🔴 2. REGLAS ESPECÍFICAS
+                // 1. REGLAS ESPECÍFICAS PRIMERO
+                // Permite capturar el secreto específico y asociar el ID de la regla exacta
                 foreach (var rule in _rules)
                 {
                     try
@@ -87,7 +62,7 @@ namespace CredentialScanner.Services
                                 }
                             }
 
-                            if (string.IsNullOrEmpty(secret) || secret.Length < 4) continue;
+                            if (string.IsNullOrEmpty(secret) || secret.Length < 3) continue;
 
                             int lineNumber = GetLineNumber(content, match.Index);
 
@@ -97,29 +72,23 @@ namespace CredentialScanner.Services
                             if (findings.Any(f => f.LineNumber == lineNumber && f.Secret == secret))
                                 continue;
 
-                            //  CALCULAR PUNTUACIÓN
                             string lineContent = lineNumber >= 1 && lineNumber <= lines.Length
                                 ? lines[lineNumber - 1].Trim()
                                 : secret;
 
-                            var riskScore = _riskScoring.CalcularPuntuacion(lineContent, filePath);
-
-                            //  DIAGNÓSTICO
-                           // Logger.Info($"DIAGNÓSTICO: Regla {rule.Id} Línea {lineNumber} → {riskScore.Score} pts (umbral: {_umbralLog})", "", "");
-
-                            //  SOLO AGREGAR SI SUPERA EL UMBRAL
-                            if (riskScore.Score < _umbralLog)
-                                continue;
+                            var riskScore = _riskScoring.CalcularPuntuacionConContexto(lineContent, lineNumber, filePath, lines);
+                            int finalScore = Math.Max(riskScore.Score, _umbralLog);
 
                             findings.Add(new CredentialFinding
                             {
                                 FilePath = filePath,
                                 RuleId = rule.Id,
-                                Description = $"{rule.Description} ({riskScore.Score} pts)",
+                                Description = $"{rule.Description} ({finalScore} pts)",
                                 Severity = rule.Severity,
                                 Secret = secret,
                                 LineNumber = lineNumber,
-                                FullMatch = match.Value
+                                FullMatch = match.Value,
+                                Score = finalScore
                             });
 
                             lineasAgregadas.Add(lineNumber);
@@ -128,14 +97,42 @@ namespace CredentialScanner.Services
                     catch { }
                 }
 
-                //Logger.Info($"DIAGNÓSTICO: Total hallazgos: {findings.Count}", "", "");
+                // 2. HEURÍSTICA / PUNTUACIÓN DE RIESGO PARA LÍNEAS RESTANTES
+                var riskScores = _riskScoring.AnalyzeContent(content, filePath);
+
+                foreach (var risk in riskScores)
+                {
+                    if (lineasAgregadas.Contains(risk.LineNumber))
+                        continue;
+
+                    string candidateSecret = risk.Line;
+                    var labelMatch = Regex.Match(risk.Line, @"(?i)(?:usuario|user(?:name)?|contraseña|password|pass|clave|pwd)\s*[:=]\s*[""']?([^\s""']+)[""']?");
+                    if (labelMatch.Success && labelMatch.Groups.Count > 1)
+                    {
+                        candidateSecret = labelMatch.Groups[1].Value;
+                    }
+
+                    findings.Add(new CredentialFinding
+                    {
+                        FilePath = filePath,
+                        RuleId = risk.RuleId,
+                        Description = $"{risk.Description} ({risk.Score} pts)",
+                        Severity = risk.Severity,
+                        Secret = candidateSecret,
+                        LineNumber = risk.LineNumber,
+                        FullMatch = risk.Line,
+                        Score = risk.Score
+                    });
+
+                    lineasAgregadas.Add(risk.LineNumber);
+                }
             }
             catch (Exception ex)
             {
-                Logger.Error($"DIAGNÓSTICO ERROR: {ex.Message}", "", "");
+                Logger.Error($"Error analizando archivo {Path.GetFileName(filePath)}: {ex.Message}", "", "");
             }
 
-            return findings;
+            return findings.OrderBy(f => f.LineNumber).ToList();
         }
         public bool ShouldExcludeFile(string filePath)
         {

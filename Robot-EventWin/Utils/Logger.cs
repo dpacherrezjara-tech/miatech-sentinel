@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Text;
 
@@ -28,7 +28,7 @@ namespace CredentialScanner.Utils
                 _logPath = logPath;
                 _logFileName = logFileName;
 
-                // 🔴 CREAR LA CARPETA SI NO EXISTE
+                //  CREAR LA CARPETA SI NO EXISTE
                 if (!Directory.Exists(_logPath))
                 {
                     Directory.CreateDirectory(_logPath);
@@ -37,14 +37,14 @@ namespace CredentialScanner.Utils
                 _initialized = true;
 
                 // Escribir una línea de prueba
-                Write("INFO", "═══════════════════════════════════════");
+                /*Write("INFO", "═══════════════════════════════════════");
                 Write("INFO", "Logger inicializado correctamente");
                 Write("INFO", $"Ruta: {Path.Combine(_logPath, _logFileName)}");
-                Write("INFO", "═══════════════════════════════════════");
+                Write("INFO", "═══════════════════════════════════════");*/
             }
             catch (Exception ex)
             {
-                // 🔴 MOSTRAR ERROR SI FALLA
+                //  MOSTRAR ERROR SI FALLA
                 System.Windows.Forms.MessageBox.Show(
                     $"Error al inicializar Logger:\n\n{ex.Message}\n\nRuta: {logPath}",
                     "Error de Logger",
@@ -69,13 +69,16 @@ namespace CredentialScanner.Utils
             try
             {
                 string fullLogPath = Path.Combine(_logPath, _logFileName);
-                string timestamp = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffzzz");
-                string logEntry = $"{timestamp} | {level.PadRight(7)} | {computerName} | {userName} | {message}{Environment.NewLine}";
+                string timestamp = DateTime.Now.ToString("yyyy-MM-dd-HH:mm:ss");
+                string hostInfo = (!string.IsNullOrEmpty(computerName) || !string.IsNullOrEmpty(userName))
+                    ? $"{computerName} | {userName} | "
+                    : " ";
+                string logEntry = $"{timestamp} | {level.PadRight(7)} | {hostInfo}{message}{Environment.NewLine}";
                 File.AppendAllText(fullLogPath, logEntry, Encoding.UTF8);
             }
             catch (Exception ex)
             {
-                // 🔴 MOSTRAR ERROR SI FALLA
+                //  MOSTRAR ERROR SI FALLA
                 System.Windows.Forms.MessageBox.Show(
                     $"Error escribiendo log:\n\n{ex.Message}\n\nRuta: {Path.Combine(_logPath, _logFileName)}",
                     "Error de Logger",

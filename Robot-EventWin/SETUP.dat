@@ -1,15 +1,11 @@
-# ============================================================
 # CONFIGURACIÓN DEL SCANNER - MIATECH SENTINEL
-# ============================================================
 
 [SCANNER_SETTINGS]
 MAX_FILE_SIZE_MB § 100
-EXCLUDED_PATHS § C:\Windows;C:\Program Files;C:\Program Files (x86);C:\Users\dpacherrez\AppData;D:\REPROSITORIO-GIT
+EXCLUDED_PATHS § C:\Windows;C:\Program Files;C:\Program Files (x86);D:\Program Files;D:\Program Files (x86);C:\Users\dpacherrez;D:\Users\dpacherrez;D:\REPROSITORIO-GIT
 EXCLUDED_EXTENSIONS § .exe;.dll;.msi;.tmp;.cache;.mp3;.mp4;.jpg;.jpeg;.png;.gif;.pdf;.doc;.docx;.zip;.rar;.7z;.iso;.bin;.dat;.pem;.key;.crt;.cer;.log;.cache;.bak;.jar;.xml;.html;.cs;.vb;.fs;.js;.ts;.py;.java;.c;.cpp;.h;.csproj;.sln
 
-# ============================================================
 # REGLAS
-# ============================================================
 
 [SCANNER_RULES]
 RULES1 § usuario-colon § Detecta usuario: valor § (?i)(?:usuario|user(?:name)?)\s*[:=]\s*["'""]?([A-Za-z0-9_\-.@]{3,})["'""]? § High
@@ -26,9 +22,7 @@ RULES11 § db-credenciales § Detecta credenciales DB § (?i)(?:base\s*de\s*dato
 RULES12 § git-user § Detecta usuario Git § usr_mi_[A-Za-z0-9_\-]{10,} § High
 RULES13 § sql-grant § Detecta GRANT § (?i)GRANT\s+ALL\s+ON\s+PROCEDURE\s+[A-Za-z0-9_.]+\s+TO\s+[A-Za-z0-9_]+ § High
 
-# ============================================================
 # PUNTUACIÓN DE RIESGO
-# ============================================================
 
 [RISK_SCORING]
 UMBRAL_INFO § 40
@@ -49,9 +43,7 @@ PALABRAS_COMUNES § config;setting;option;value;default;system;window;button;lab
 
 ARCHIVOS_SOSPECHOSOS § credencial;password;contraseña;clave;pass;user;usuario;login;auth;secret;token;key;access
 
-# ============================================================
 # MONITOREO
-# ============================================================
 
 [MONITOR_SETTINGS]
 ENABLE_MONITORING § true
@@ -59,18 +51,15 @@ MONITOR_ALL_DRIVES § true
 MONITOR_SPECIFIC_PATHS § 
 AUTO_START § true
 
-# ============================================================
 # LOGS
-# ============================================================
 
 [LOG_SETTINGS]
 LOG_PATH § D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\Logs
 LOG_FILE_NAME § MiatechSentinel.log
 LOG_LEVEL § Info
+LOG_INCLUDE_HOST_INFO § false
 
-# ============================================================
 # SEGURIDAD
-# ============================================================
 
 [SECURITY_SETTINGS]
 EXIT_TOKEN § Pr0c3s02029@

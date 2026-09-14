@@ -1,4 +1,4 @@
-﻿using CredentialScanner.Models;
+using CredentialScanner.Models;
 using CredentialScanner.Utils;
 using System;
 using System.Collections.Generic;
@@ -224,5 +224,6 @@ namespace CredentialScanner.Services
         public string LogFileName => GetValue("LOG_SETTINGS", "LOG_FILE_NAME", "MiatechSentinel.log");
         public string LogLevel => GetValue("LOG_SETTINGS", "LOG_LEVEL", "Info");
         public bool LogMaskSecrets => GetValue<bool>("LOG_SETTINGS", "LOG_MASK_SECRETS", true);
+        public bool LogIncludeHostInfo => GetValue<bool>("LOG_SETTINGS", "LOG_INCLUDE_HOST_INFO", false);
     }
 }

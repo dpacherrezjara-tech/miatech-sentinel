@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace CredentialScanner.Models
 {
@@ -11,6 +11,7 @@ namespace CredentialScanner.Models
         public string Secret { get; set; }
         public int LineNumber { get; set; }
         public string FullMatch { get; set; }
+        public int Score { get; set; }
         public DateTime DetectedAt { get; set; } = DateTime.Now;
     }
 }

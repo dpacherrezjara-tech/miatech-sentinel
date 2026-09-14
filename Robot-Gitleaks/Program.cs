@@ -736,7 +736,7 @@ namespace CredentialScanner
                 sb.AppendLine($"   Descripción: {finding.Description}");
                 sb.AppendLine($"   Severidad: {finding.Severity}");
                 sb.AppendLine($"   Secreto: {finding.Secret}");
-                sb.AppendLine($"   Línea: {finding.LineNumber}");
+                //sb.AppendLine($"   Línea: {finding.LineNumber}");
                 sb.AppendLine($"   Match: {finding.FullMatch}");
                 sb.AppendLine($"   Detectado: {finding.DetectedAt:yyyy-MM-dd HH:mm:ss}");
                 sb.AppendLine($"   {'─'}");

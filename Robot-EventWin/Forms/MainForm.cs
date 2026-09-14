@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
@@ -753,15 +753,19 @@ namespace CredentialScanner
                 {
                     totalFindingsCount += findings.Count;
 
+                    string compName = _config.LogIncludeHostInfo ? _computerName : "";
+                    string usrName = _config.LogIncludeHostInfo ? _userName : "";
+
                     foreach (var finding in findings)
                     {
                         string secretLimpio = LimpiarSecret(finding.Secret);
 
-                        Logger.Alert(
-                            $"[{finding.Severity}] {Path.GetFileName(filePath)} | " +
+                        Logger.Info(
+                            $"[{finding.Severity}] {filePath} | " +
                             $"Línea {finding.LineNumber}: {secretLimpio} | " +
-                            $"{finding.Description}",
-                            _computerName, _userName);
+                            $"Regla: {finding.RuleId} | " +
+                            $"Riesgo: {finding.Score} pts;",
+                            compName, usrName);
                     }
 
                     UpdateUI();
