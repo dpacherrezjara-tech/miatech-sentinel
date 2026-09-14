@@ -264,14 +264,14 @@ namespace CredentialScanner
             lblFooter.Text = "© 2026 Miatech - Todos los derechos reservados";
             lblFooter.Font = new Font("Segoe UI", 7.5F);
             lblFooter.ForeColor = Color.Gray;
-            lblFooter.TextAlign = ContentAlignment.MiddleCenter;
+            lblFooter.TextAlign = ContentAlignment.MiddleRight; //MiddleRight
             lblFooter.Location = new Point(0, 5);
-            lblFooter.Size = new Size(500, 16);
+            lblFooter.Size = new Size(250, 16);
 
             panelFooter.Controls.Add(lblFooter);
 
-            this.ClientSize = new Size(500, 240);
-            this.MinimumSize = new Size(450, 220);
+            this.ClientSize = new Size(300, 200);
+            this.MinimumSize = new Size(200, 150);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
