@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
@@ -13,6 +13,9 @@
 	<ItemGroup>
 	  <Content Include="..\..\..\..\UserFilesMiatech\dpacherrez\Mis imágenes\Icono\Icon2.ico" Link="Icon2.ico" />
 	  <Content Include="Icon1.ico" Link="Icon1.ico" />
+	  <None Update="SETUP.dat">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 	<ItemGroup>

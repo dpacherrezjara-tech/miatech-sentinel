@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -110,29 +110,35 @@ namespace CredentialScanner.Services
             if (string.IsNullOrEmpty(line))
                 return score;
 
-            // 1. ¿Tiene etiqueta explícita?
-            if (Regex.IsMatch(line, @"(?i)(?:usuario|user(?:name)?|contraseña|password|pass|clave|pwd|u|c)\s*[:=]\s*\S+"))
+            // 0. Extraer token candidato de secreto
+            string candidate = ExtractCandidateSecret(line);
+            if (string.IsNullOrEmpty(candidate) || EsFalsoPositivoToken(candidate, line))
+                return score;
+
+            // 1. ¿Tiene etiqueta explícita? (Soporta separadores :, =, ->, =>, |)
+            if (Regex.IsMatch(line, @"(?i)\b(?:usuario|user(?:name)?|contraseña|password|pass|clave|pwd|u|c)\b\s*(?:[:=]|->|=>|\|)\s*\S+") &&
+                !Regex.IsMatch(candidate, @"^(?:config|os|sys|env|settings|request|self|this)\.", RegexOptions.IgnoreCase))
             {
                 score.Score += _puntosEtiqueta;
                 score.Reasons.Add($"Etiqueta explícita (+{_puntosEtiqueta})");
             }
 
-            // 2. ¿Tiene formato de contraseña? (mayúscula + minúscula + número)
-            if (HasPasswordFormat(line))
+            // 2. ¿Tiene formato de contraseña? (mayúscula + minúscula + número en el valor)
+            if (HasPasswordFormat(candidate))
             {
                 score.Score += _puntosFormatoContrasena;
                 score.Reasons.Add($"Formato de contraseña (+{_puntosFormatoContrasena})");
             }
 
-            // 3. ¿Tiene símbolos?
-            if (Regex.IsMatch(line, @"[@#$%^&*!_.\-]"))
+            // 3. ¿Tiene símbolos en el valor?
+            if (Regex.IsMatch(candidate, @"[@#$%^&*!_.\-+~`=\\/|]"))
             {
                 score.Score += _puntosSimbolo;
                 score.Reasons.Add($"Tiene símbolos (+{_puntosSimbolo})");
             }
 
-            // 4. ¿Longitud sospechosa (8-32)?
-            if (line.Length >= 8 && line.Length <= 32)
+            // 4. ¿Longitud sospechosa del valor (8-32)?
+            if (candidate.Length >= 8 && candidate.Length <= 32)
             {
                 score.Score += _puntosLongitud;
                 score.Reasons.Add($"Longitud sospechosa (+{_puntosLongitud})");
@@ -157,7 +163,7 @@ namespace CredentialScanner.Services
             }
 
             // 7. ¿No es una palabra común?
-            if (!_palabrasComunes.Contains(line.ToLowerInvariant()))
+            if (!_palabrasComunes.Contains(candidate.ToLowerInvariant()))
             {
                 score.Score += _puntosNoPalabraComun;
                 score.Reasons.Add($"No es palabra común (+{_puntosNoPalabraComun})");
@@ -193,16 +199,75 @@ namespace CredentialScanner.Services
         }
 
         // ============================================================
+        // EXTRAER TOKEN CANDIDATO A SECRETO DE LA LÍNEA
+        // ============================================================
+        public string ExtractCandidateSecret(string line)
+        {
+            if (string.IsNullOrWhiteSpace(line)) return string.Empty;
+
+            // 1. Si tiene valor entre comillas: pass = "secreto"
+            var quotedMatch = Regex.Match(line, @"[""']([^""'\r\n]{3,})[""']");
+            if (quotedMatch.Success)
+                return quotedMatch.Groups[1].Value.Trim();
+
+            // 2. Si tiene etiqueta explícita con separadores: :, =, ->, =>, |
+            var labelMatch = Regex.Match(line, @"(?i)\b(?:usuario|user(?:name)?|contraseña|password|pass|clave|pwd|u|c)\b\s*(?:[:=]|->|=>|\|)\s*([^\s""'#;,\(\)\[\]\{\}]+)");
+            if (labelMatch.Success)
+                return labelMatch.Groups[1].Value.Trim();
+
+            // 3. De lo contrario, la línea completa recortada
+            return line.Trim();
+        }
+
+        // ============================================================
+        // VERIFICAR SI EL TOKEN ES UN FALSO POSITIVO TÍPICO DE CÓDIGO
+        // ============================================================
+        private bool EsFalsoPositivoToken(string token, string line)
+        {
+            if (string.IsNullOrWhiteSpace(token)) return true;
+
+            // Placeholders: {keyword}, ${var}, <placeholder>, %param%
+            if (token.StartsWith("{") && token.EndsWith("}")) return true;
+            if (token.StartsWith("<") && token.EndsWith(">")) return true;
+            if (token.StartsWith("$") && token.EndsWith("}")) return true;
+
+            // Llamadas a función o métodos en código
+            if (token.EndsWith("(") || token.Contains("(") || token.Contains(")")) return true;
+            if (token.Contains(".") && (token.StartsWith("config.", StringComparison.OrdinalIgnoreCase) ||
+                                       token.StartsWith("os.", StringComparison.OrdinalIgnoreCase) ||
+                                       token.StartsWith("sys.", StringComparison.OrdinalIgnoreCase) ||
+                                       token.StartsWith("self.", StringComparison.OrdinalIgnoreCase)))
+                return true;
+
+            // En la línea original, si inmediatamente sigue un '(' es una llamada
+            if (Regex.IsMatch(line, Regex.Escape(token) + @"\s*\("))
+                return true;
+
+            // Palabras clave de programación no secretas
+            var palabrasReservadas = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                "none", "null", "undefined", "true", "false", "empty", "default", "dummy", "test",
+                "string", "integer", "boolean", "object", "array", "dict", "keyword", "value"
+            };
+            if (palabrasReservadas.Contains(token))
+                return true;
+
+            return false;
+        }
+
+        // ============================================================
         // MÉTODO: RECHAZAR LÍNEAS QUE NO SON CREDENCIALES
         // ============================================================
         private bool EsLineaNoCredencial(string line)
         {
+            if (string.IsNullOrWhiteSpace(line)) return true;
+
             // 1. Solo símbolos (---, ===, ___, ***, etc.)
             if (Regex.IsMatch(line, @"^[-_=*#~\s]+$"))
                 return true;
 
             // 2. Sin letras ni números
-            if (!line.Any(c => char.IsLetterOrDigit(c)))
+            if (!line.Any(char.IsLetterOrDigit))
                 return true;
 
             // 3. Solo un carácter repetido (aaaa, 1111, ....)
@@ -214,12 +279,29 @@ namespace CredentialScanner.Services
                 return true;
 
             // 5. Etiquetas solas sin valor
-            if (Regex.IsMatch(line, @"^(?:usuario|user|contraseña|password|pass|clave|pwd|username)\s*[:=]?\s*$",
+            if (Regex.IsMatch(line, @"^(?:usuario|user|contraseña|password|pass|clave|pwd|username)\s*(?:[:=]|->|=>|\|)?\s*$",
                 RegexOptions.IgnoreCase))
                 return true;
 
             // 6. URLs
             if (Regex.IsMatch(line, @"^https?://", RegexOptions.IgnoreCase))
+                return true;
+
+            // 7. Placeholders únicos: {keyword}, ${variable}, <placeholder>
+            if (Regex.IsMatch(line, @"^\s*[\{\$<].*[\}\>]\s*$"))
+                return true;
+
+            // 8. Instrucciones de código comunes que no contienen credenciales directas
+            if (Regex.IsMatch(line, @"^\s*(?:import|from|def|class|return|using|namespace|public|private|protected|package)\b", RegexOptions.IgnoreCase))
+                return true;
+
+            // 9. Lectura de configuración / logs / llamadas a métodos
+            if (Regex.IsMatch(line, @"\b(?:config\.get|os\.getenv|os\.environ|getenv|settings\.get|request\.|self\.|logger\.|print\(|console\.log)\b", RegexOptions.IgnoreCase))
+                return true;
+
+            // 10. Líneas de código que terminan en coma o paréntesis de apertura
+            string trimmed = line.TrimEnd();
+            if (trimmed.EndsWith("(") || trimmed.EndsWith(","))
                 return true;
 
             return false;
@@ -228,12 +310,19 @@ namespace CredentialScanner.Services
         // ============================================================
         // MÉTODO: VERIFICAR FORMATO DE CONTRASEÑA
         // ============================================================
-        private bool HasPasswordFormat(string line)
+        private bool HasPasswordFormat(string token)
         {
-            bool hasUpper = line.Any(char.IsUpper);
-            bool hasLower = line.Any(char.IsLower);
-            bool hasDigit = line.Any(char.IsDigit);
-            return hasUpper && hasLower && hasDigit && line.Length >= 8 && line.Length <= 32;
+            if (string.IsNullOrEmpty(token) || token.Length < 8 || token.Length > 32)
+                return false;
+
+            // No debe contener espacios, paréntesis ni llamadas de función
+            if (token.Contains(' ') || token.Contains('(') || token.Contains(')') || token.Contains('.'))
+                return false;
+
+            bool hasUpper = token.Any(char.IsUpper);
+            bool hasLower = token.Any(char.IsLower);
+            bool hasDigit = token.Any(char.IsDigit);
+            return hasUpper && hasLower && hasDigit;
         }
 
         // ============================================================
@@ -252,9 +341,11 @@ namespace CredentialScanner.Services
                 var line = allLines[i].Trim();
                 if (string.IsNullOrEmpty(line)) continue;
                 if (line.Length < 3) continue;
+                if (EsLineaNoCredencial(line)) continue;
 
-                if (HasPasswordFormat(line) ||
-                    Regex.IsMatch(line, @"(?i)(?:usuario|user(?:name)?|contraseña|password|pass|clave|pwd)\s*[:=]"))
+                string cand = ExtractCandidateSecret(line);
+                if (!string.IsNullOrEmpty(cand) && (HasPasswordFormat(cand) ||
+                    Regex.IsMatch(line, @"(?i)\b(?:usuario|user(?:name)?|contraseña|password|pass|clave|pwd)\b\s*(?:[:=]|->|=>|\|)")))
                 {
                     sospechosas++;
                 }

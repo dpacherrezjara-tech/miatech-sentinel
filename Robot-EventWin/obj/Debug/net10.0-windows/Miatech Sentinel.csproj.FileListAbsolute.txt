@@ -43,3 +43,4 @@ D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\obj\Debug\net10.0-window
 D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\obj\Debug\net10.0-windows\Miatech Sentinel.pdb
 D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\obj\Debug\net10.0-windows\Miatech Sentinel.genruntimeconfig.cache
 D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\obj\Debug\net10.0-windows\ref\Miatech Sentinel.dll
+D:\REPROSITORIO-GIT\NET\miatech-sentinel\Robot-EventWin\bin\Debug\net10.0-windows\SETUP.dat

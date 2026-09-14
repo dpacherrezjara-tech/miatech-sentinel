@@ -76,6 +76,9 @@ namespace CredentialScanner.Services
                                 ? lines[lineNumber - 1].Trim()
                                 : secret;
 
+                            if (EsFalsoPositivo(secret, lineContent, filePath))
+                                continue;
+
                             var riskScore = _riskScoring.CalcularPuntuacionConContexto(lineContent, lineNumber, filePath, lines);
                             int finalScore = Math.Max(riskScore.Score, _umbralLog);
 
@@ -105,12 +108,12 @@ namespace CredentialScanner.Services
                     if (lineasAgregadas.Contains(risk.LineNumber))
                         continue;
 
-                    string candidateSecret = risk.Line;
-                    var labelMatch = Regex.Match(risk.Line, @"(?i)(?:usuario|user(?:name)?|contraseña|password|pass|clave|pwd)\s*[:=]\s*[""']?([^\s""']+)[""']?");
-                    if (labelMatch.Success && labelMatch.Groups.Count > 1)
-                    {
-                        candidateSecret = labelMatch.Groups[1].Value;
-                    }
+                    string candidateSecret = _riskScoring.ExtractCandidateSecret(risk.Line);
+                    if (string.IsNullOrEmpty(candidateSecret))
+                        candidateSecret = risk.Line;
+
+                    if (EsFalsoPositivo(candidateSecret, risk.Line, filePath))
+                        continue;
 
                     findings.Add(new CredentialFinding
                     {
@@ -133,6 +136,68 @@ namespace CredentialScanner.Services
             }
 
             return findings.OrderBy(f => f.LineNumber).ToList();
+        }
+
+        private bool EsFalsoPositivo(string secret, string lineContent, string filePath)
+        {
+            if (string.IsNullOrWhiteSpace(secret)) return true;
+
+            string s = secret.Trim();
+            string line = lineContent.Trim();
+
+            // 1. Longitud mínima
+            if (s.Length < 3) return true;
+
+            // 2. Placeholders y expresiones de plantilla: {keyword}, ${var}, <placeholder>, %param%
+            if ((s.StartsWith("{") && s.EndsWith("}")) ||
+                (s.StartsWith("<") && s.EndsWith(">")) ||
+                (s.StartsWith("$") && s.EndsWith("}")) ||
+                (s.StartsWith("%") && s.EndsWith("%")))
+                return true;
+
+            // 3. Llamadas a métodos o funciones en código (ej: config.get, os.getenv, get(...))
+            if (s.EndsWith("(") || s.Contains("(") || s.Contains(")"))
+                return true;
+
+            if (Regex.IsMatch(s, @"^(?:config|os|sys|env|settings|request|params|dict|self|this)\.", RegexOptions.IgnoreCase))
+                return true;
+
+            if (Regex.IsMatch(s, @"\.(?:get|getattr|getenv|value|text|string|fetch|read|post|put|delete)\b", RegexOptions.IgnoreCase))
+                return true;
+
+            // 4. Si en la línea después del secreto inmediatamente sigue '(' es una llamada a función
+            if (Regex.IsMatch(line, Regex.Escape(s) + @"\s*\("))
+                return true;
+
+            // 5. Palabras clave neutras / código / valores booleanos o nulos
+            var palabrasInvalidas = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                "none", "null", "undefined", "true", "false", "empty", "default", "dummy", "test",
+                "string", "integer", "boolean", "object", "array", "dict", "keyword", "value",
+                "password", "usuario", "username", "passwd", "secret", "token", "auth", "cred"
+            };
+            if (palabrasInvalidas.Contains(s))
+                return true;
+
+            // 6. En archivos de código (.py, .js, .ts, .cs, .java, .go, .cpp, etc.)
+            // Una asignación a un identificador sin comillas (ej: repo_url_with_creds) es una variable de código
+            var ext = Path.GetExtension(filePath).ToLowerInvariant();
+            var codeExtensions = new HashSet<string> { ".py", ".cs", ".js", ".ts", ".java", ".cpp", ".c", ".h", ".go", ".rb", ".php" };
+            if (codeExtensions.Contains(ext))
+            {
+                bool estaEntreComillas = line.Contains($"\"{s}\"") || line.Contains($"'{s}'");
+                if (!estaEntreComillas)
+                {
+                    // Variables en snake_case minúsculas sin números (ej: repo_url_with_creds)
+                    if (Regex.IsMatch(s, @"^[a-z_][a-z0-9_]*$") && !s.Any(char.IsDigit))
+                        return true;
+
+                    if (s.Contains("."))
+                        return true;
+                }
+            }
+
+            return false;
         }
         public bool ShouldExcludeFile(string filePath)
         {
